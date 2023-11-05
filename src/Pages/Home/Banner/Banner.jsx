@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import banner from "/src/images/banner/Home-banner.png";
 
 /**
  * Banners Image
