@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
+import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 const ErrorPage = () => {
+  const error = useRouteError();
+
+  console.log(error);
   return (
     <>
       <Navbar inHome={true} />
@@ -17,11 +21,21 @@ const ErrorPage = () => {
         <div className="text-white">
           <p>You may have to check your URL again</p>
           <p>
-            Go to <Link className="btn btn-sm border-red-400" to="/">home</Link> page
+            Go to{" "}
+            <Link className="btn btn-sm border-red-400" to="/">
+              home
+            </Link>{" "}
+            page
           </p>
         </div>
+        <details className="text-white text-sm w-full">
+          <summary>For Developers:</summary>
+          <div>
+            <p>{error?.error?.message}</p>
+          </div>
+        </details>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };
