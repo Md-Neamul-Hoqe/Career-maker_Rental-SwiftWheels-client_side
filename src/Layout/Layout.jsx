@@ -6,9 +6,9 @@ const Layout = () => {
   return (
     <>
       <header className="min-h-[65px]">
-        <Navbar />
+        <Navbar inHome={true} />
       </header>
-      <main>
+      <main className="min-h-[calc(100vh-265px)]">
         <Outlet />
       </main>
       <footer className="bg-black min-h-[200px]">
