@@ -5,13 +5,13 @@ import Footer from "../Pages/Shared/Footer/Footer";
 const Layout = () => {
   return (
     <>
-      <header>
+      <header className="min-h-[65px]">
         <Navbar />
       </header>
       <main>
         <Outlet />
       </main>
-      <footer>
+      <footer className="bg-black min-h-[200px]">
         <Footer />
       </footer>
     </>
