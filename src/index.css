@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .active {
-  @apply border-2 border-red-500;
+  @apply border-2 border-red-500 text-red-500 font-semibold !important;
 }

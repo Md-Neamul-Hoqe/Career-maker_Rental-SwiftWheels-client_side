@@ -1,5 +1,7 @@
 import Banner from "./Banner/Banner";
+import Popular from "./Popular/Popular";
 import Rent from "./Rent/Rent";
+import Testimonials from "./Testimonials/Testimonials";
 import WhyUs from "./WhyUs/WhyUs";
 
 /**
@@ -28,6 +30,9 @@ const Home = () => {
   return (
     <>
       <Banner />
+
+      <Popular />
+
       <Rent
         props={{
           car: {
@@ -48,6 +53,7 @@ const Home = () => {
       />
 
       <WhyUs />
+      <Testimonials />
     </>
   );
 };

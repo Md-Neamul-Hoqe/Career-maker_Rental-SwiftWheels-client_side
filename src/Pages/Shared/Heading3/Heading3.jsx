@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 
 const Heading3 = ({ children }) => {
-  return <h3 className="text-4xl text-black font-semibold">{children}</h3>;
+  return (
+    <h3 className="text-4xl text-black font-semibold capitalize">{children}</h3>
+  );
 };
 
 Heading3.propTypes = {

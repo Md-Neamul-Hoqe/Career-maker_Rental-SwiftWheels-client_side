@@ -1,0 +1,20 @@
+[
+  {
+    "image": "https://i.ibb.co/FqFkcMR/client-01.jpg",
+    "name": "Alice Johnson",
+    "title": "Happy Customer",
+    "comment": "I had a fantastic experience with the rental cars from [Your Car Rental Company]. The vehicle was clean, well-maintained, and the customer service was top-notch. I highly recommend them to anyone in need of a reliable rental car."
+  },
+  {
+    "image": "https://i.ibb.co/NC8qZLp/client-02.jpg",
+    "name": "John Smith",
+    "title": "Frequent Traveler",
+    "comment": "I've been renting cars from [Your Car Rental Company] for years, and they never disappoint. Their diverse fleet of vehicles allows me to choose the perfect car for any trip. Great prices, easy booking, and friendly staff make them my go-to choice."
+  },
+  {
+    "image": "https://i.ibb.co/FJBq1hy/client-03.jpg",
+    "name": "Sarah Parker",
+    "title": "Family Vacationer",
+    "comment": "We rented an SUV from [Your Car Rental Company] for our family road trip, and it was an excellent choice. The car was spacious, comfortable, and reliable. Thanks to them, our vacation was a breeze. We'll definitely use their services again."
+  }
+]
