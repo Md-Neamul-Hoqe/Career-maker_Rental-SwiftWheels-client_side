@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FiArrowUpRight } from "react-icons/fi";
-import MaxWidthSection from "../../../components/MaxWidthSection";
+import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import P from "../../Shared/P/P";
 

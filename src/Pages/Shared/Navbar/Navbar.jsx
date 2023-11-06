@@ -14,14 +14,14 @@ const Navbar = () => {
       <li tabIndex={0}>
         <details>
           <summary>Services</summary>
-          <ul className="p-2 rounded-none join join-vertical">
+          <ul className="p-2 rounded-none join join-vertical bg-gray-600 border border-white">
             <li>
-              <NavLink to="" className="whitespace-nowrap join-item">
+              <NavLink to="/rent-car" className="whitespace-nowrap join-item">
                 Rent Car
               </NavLink>
             </li>
             <li>
-              <NavLink to="" className="whitespace-nowrap join-item">
+              <NavLink to="/rent-bike" className="whitespace-nowrap join-item">
                 Rent Bike
               </NavLink>
             </li>
@@ -34,7 +34,7 @@ const Navbar = () => {
       <li tabIndex={0}>
         <details>
           <summary>Dashboard</summary>
-          <ul className="p-2 rounded-none join join-vertical">
+          <ul className="p-2 rounded-none join join-vertical bg-gray-600 border border-white">
             <li>
               <NavLink to="" className="whitespace-nowrap join-item">
                 Add Service
@@ -83,7 +83,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52">
               {NavLinks}
             </ul>
           </div>
@@ -104,7 +104,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52">
               <li>
                 <a className="justify-between">
                   Profile

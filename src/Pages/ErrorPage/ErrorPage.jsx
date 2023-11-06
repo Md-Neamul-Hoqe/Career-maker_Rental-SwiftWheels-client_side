@@ -18,7 +18,7 @@ const ErrorPage = () => {
             alt="Error Page"
           />
         </figure>
-        <div className="text-white">
+        <div>
           <p>You may have to check your URL again</p>
           <p>
             Go to{" "}

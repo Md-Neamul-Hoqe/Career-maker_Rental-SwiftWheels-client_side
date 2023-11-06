@@ -10,7 +10,18 @@
       "email": "info@citycycles.com"
     },
     "price": 20,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "6-Speed",
+      "horsepower": "29 HP",
+      "engine": "4-Stroke, Twin-Cylinder",
+      "stroke": "4.6 inches",
+      "overallMileage": "48 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/Hn8YXy1/service-bike-1.png",
@@ -23,7 +34,18 @@
       "email": "info@ecobike.com"
     },
     "price": 30,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "5-Speed",
+      "horsepower": "38 HP",
+      "engine": "4-Stroke, Single Cylinder",
+      "stroke": "5 inches",
+      "overallMileage": "42 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/nfSWXYg/service-bike-2.png",
@@ -36,7 +58,18 @@
       "email": "info@beachcycles.com"
     },
     "price": 25,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "6-Speed",
+      "horsepower": "27 HP",
+      "engine": "4-Stroke, Single Cylinder",
+      "stroke": "4.7 inches",
+      "overallMileage": "58 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/VBk34bQ/service-bike-3.png",
@@ -49,7 +82,18 @@
       "email": "info@adventurebikes.com"
     },
     "price": 35,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "5-Speed",
+      "horsepower": "33 HP",
+      "engine": "4-Stroke, Twin-Cylinder",
+      "stroke": "4.3 inches",
+      "overallMileage": "50 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/JrxqLHj/service-bike-4.png",
@@ -62,7 +106,18 @@
       "email": "info@citycycles.com"
     },
     "price": 20,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Electric",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "N/A",
+      "engine": "Electric Motor",
+      "stroke": "N/A",
+      "overallMileage": "80 miles per charge"
+    }
   },
   {
     "img": "https://i.ibb.co/kJMvytM/service-bike-5.png",
@@ -75,7 +130,18 @@
       "email": "info@ecobike.com"
     },
     "price": 30,
-    "status": "Available"
+    "status": "Available",
+    "specifications": 
+    {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "6-Speed",
+      "horsepower": "25 HP",
+      "engine": "4-Stroke, Single Cylinder",
+      "stroke": "4.5 inches",
+      "overallMileage": "55 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/wYDzqJm/service-bike-7.png",
@@ -88,7 +154,17 @@
       "email": "info@beachcycles.com"
     },
     "price": 25,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+        "seats": 2,
+        "fuel": "Petrol",
+        "frontBrake": "Disc",
+        "gearBox": "6-Speed",
+        "horsepower": "40 HP",
+        "engine": "4-Stroke, V-Twin",
+        "stroke": "5 inches",
+        "overallMileage": "45 mpg"
+      }
   },
   {
     "img": "https://i.ibb.co/4F8tczH/service-bike-8.png",
@@ -101,6 +177,16 @@
       "email": "info@adventurebikes.com"
     },
     "price": 35,
-    "status": "Available"
+    "status": "Available",
+    "specifications":  {
+        "seats": 2,
+        "fuel": "Petrol",
+        "frontBrake": "Disc",
+        "gearBox": "5-Speed",
+        "horsepower": "30 HP",
+        "engine": "4-Stroke, Single Cylinder",
+        "stroke": "4.2 inches",
+        "overallMileage": "60 mpg"
+      }
   }
 ]

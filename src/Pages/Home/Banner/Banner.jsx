@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import P from "../../Shared/P/P";
-import MaxWidthSection from "../../../components/MaxWidthSection";
+import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 
 /**
  * Banners Image
@@ -15,7 +15,7 @@ https://i.ibb.co/Y7vm1S6/service-banner.png
 const Banner = () => {
   return (
     <section
-      className={`bg-[url(https://i.ibb.co/NYKJsX1/Home-banner.png)] bg-cover w-full min-h-screen`}>
+      className={`bg-[url(https://i.ibb.co/NYKJsX1/Home-banner.png)] bg-cover w-full min-h-screen mb-10`}>
       <MaxWidthSection>
         <div className="h-screen flex items-center">
           <div className="flex-1 space-y-10">

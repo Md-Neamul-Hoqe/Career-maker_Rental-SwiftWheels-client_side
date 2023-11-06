@@ -1,4 +1,4 @@
-import MaxWidthSection from "../../../components/MaxWidthSection";
+import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import P from "../../Shared/P/P";
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MaxWidthSection from "../../../components/MaxWidthSection";
+import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import axios from "axios";
 import P from "../../Shared/P/P";

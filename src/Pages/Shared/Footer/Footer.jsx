@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MaxWidthSection from "../../../components/MaxWidthSection";
+import MaxWidthSection from "../MaxWidthSection/MaxWidthSection";
 
 const Footer = () => {
   return (

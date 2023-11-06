@@ -10,7 +10,17 @@
       "email": "info@driveeasy.com"
     },
     "price": 50,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 5,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "150 HP",
+      "engine": "4-Cylinder",
+      "stroke": "N/A",
+      "overallMileage": "30 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
@@ -23,7 +33,17 @@
       "email": "info@cityride.com"
     },
     "price": 70,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 4,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "180 HP",
+      "engine": "V6",
+      "stroke": "N/A",
+      "overallMileage": "25 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/BNzzqK4/service-car-2.png",
@@ -36,7 +56,17 @@
       "email": "info@luxurydrive.com"
     },
     "price": 150,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 5,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "130 HP",
+      "engine": "4-Cylinder",
+      "stroke": "N/A",
+      "overallMileage": "32 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/RDxSRR3/service-car-3.png",
@@ -49,7 +79,17 @@
       "email": "info@swiftride.com"
     },
     "price": 40,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 4,
+      "fuel": "Electric",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "N/A",
+      "engine": "Electric Motor",
+      "stroke": "N/A",
+      "overallMileage": "100 miles per charge"
+    }
   },
   {
     "img": "https://i.ibb.co/KWR4Nwp/service-car-4.png",
@@ -62,7 +102,17 @@
       "email": "info@driveeasy.com"
     },
     "price": 50,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 5,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "160 HP",
+      "engine": "4-Cylinder",
+      "stroke": "N/A",
+      "overallMileage": "28 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/b2jGK2P/service-car.png",
@@ -75,7 +125,17 @@
       "email": "info@cityride.com"
     },
     "price": 70,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 5,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "140 HP",
+      "engine": "4-Cylinder",
+      "stroke": "N/A",
+      "overallMileage": "30 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
@@ -88,7 +148,17 @@
       "email": "info@luxurydrive.com"
     },
     "price": 150,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 4,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "200 HP",
+      "engine": "V6",
+      "stroke": "N/A",
+      "overallMileage": "24 mpg"
+    }
   },
   {
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
@@ -101,6 +171,16 @@
       "email": "info@swiftride.com"
     },
     "price": 40,
-    "status": "Available"
+    "status": "Available",
+    "specifications": {
+      "seats": 5,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "Automatic",
+      "horsepower": "170 HP",
+      "engine": "4-Cylinder",
+      "stroke": "N/A",
+      "overallMileage": "26 mpg"
+    }
   }
 ]
