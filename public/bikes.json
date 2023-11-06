@@ -5,7 +5,7 @@
     "area": "Downtown",
     "description": "Discover the city's heart.",
     "provider": {
-      "image": "provider3.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "CityCycles",
       "email": "info@citycycles.com"
     },
@@ -29,7 +29,7 @@
     "area": "Nature Reserves",
     "description": "Conquer the trails.",
     "provider": {
-      "image": "provider4.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "EcoBike Rentals",
       "email": "info@ecobike.com"
     },
@@ -53,7 +53,7 @@
     "area": "Coastal Routes",
     "description": "Experience the seaside.",
     "provider": {
-      "image": "provider7.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "BeachCycles",
       "email": "info@beachcycles.com"
     },
@@ -77,7 +77,7 @@
     "area": "Adventurous Trails",
     "description": "Fuel your adrenaline.",
     "provider": {
-      "image": "provider8.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "AdventureBikes",
       "email": "info@adventurebikes.com"
     },
@@ -101,7 +101,7 @@
     "area": "Downtown",
     "description": "Discover the city's heart.",
     "provider": {
-      "image": "provider3.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "CityCycles",
       "email": "info@citycycles.com"
     },
@@ -125,7 +125,7 @@
     "area": "Nature Reserves",
     "description": "Conquer the trails.",
     "provider": {
-      "image": "provider4.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "EcoBike Rentals",
       "email": "info@ecobike.com"
     },
@@ -149,7 +149,7 @@
     "area": "Coastal Routes",
     "description": "Experience the seaside.",
     "provider": {
-      "image": "provider7.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "BeachCycles",
       "email": "info@beachcycles.com"
     },
@@ -172,7 +172,7 @@
     "area": "Adventurous Trails",
     "description": "Fuel your adrenaline.",
     "provider": {
-      "image": "provider8.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "AdventureBikes",
       "email": "info@adventurebikes.com"
     },

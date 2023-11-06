@@ -5,7 +5,7 @@
     "area": "City Center",
     "description": "Efficient city driving.",
     "provider": {
-      "image": "provider1.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "DriveEasy Rentals",
       "email": "info@driveeasy.com"
     },
@@ -28,7 +28,7 @@
     "area": "Suburbs",
     "description": "Spacious family trips.",
     "provider": {
-      "image": "provider2.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "CityRide Rentals",
       "email": "info@cityride.com"
     },
@@ -51,7 +51,7 @@
     "area": "Luxury District",
     "description": "Arrive in style.",
     "provider": {
-      "image": "provider5.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "LuxuryDrive Rentals",
       "email": "info@luxurydrive.com"
     },
@@ -74,7 +74,7 @@
     "area": "Airport Zone",
     "description": "Travel light and fast.",
     "provider": {
-      "image": "provider6.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "SwiftRide Rentals",
       "email": "info@swiftride.com"
     },
@@ -97,7 +97,7 @@
     "area": "City Center",
     "description": "Efficient city driving.",
     "provider": {
-      "image": "provider1.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "DriveEasy Rentals",
       "email": "info@driveeasy.com"
     },
@@ -120,7 +120,7 @@
     "area": "Suburbs",
     "description": "Spacious family trips.",
     "provider": {
-      "image": "provider2.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "CityRide Rentals",
       "email": "info@cityride.com"
     },
@@ -143,7 +143,7 @@
     "area": "Luxury District",
     "description": "Arrive in style.",
     "provider": {
-      "image": "provider5.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "LuxuryDrive Rentals",
       "email": "info@luxurydrive.com"
     },
@@ -166,7 +166,7 @@
     "area": "Airport Zone",
     "description": "Travel light and fast.",
     "provider": {
-      "image": "provider6.jpg",
+      "image": "https://i.ibb.co/7vx2MGG/user-1.png",
       "name": "SwiftRide Rentals",
       "email": "info@swiftride.com"
     },

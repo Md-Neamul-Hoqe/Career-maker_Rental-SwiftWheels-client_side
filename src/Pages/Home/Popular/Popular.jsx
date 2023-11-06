@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useRouteError } from "react-router-dom";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import axios from "axios";
-import Service from "../../Shared/Service/Service";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
+import PopularService from "./PopularService";
 
 const Popular = () => {
   const error = useRouteError();
@@ -47,7 +47,10 @@ const Popular = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
           {bikes.slice(0, 8).map((bike, idx) => (
-            <Service key={idx} bike={typeof bike === "object" ? bike : {}} />
+            <PopularService
+              key={idx}
+              bike={typeof bike === "object" ? bike : {}}
+            />
           ))}
         </div>
       )}
@@ -70,7 +73,10 @@ const Popular = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
           {cars.slice(0, 8).map((car, idx) => (
-            <Service key={idx} car={typeof car === "object" ? car : {}} />
+            <PopularService
+              key={idx}
+              car={typeof car === "object" ? car : {}}
+            />
           ))}
         </div>
       )}
