@@ -8,22 +8,6 @@ import WhyUs from "./WhyUs/WhyUs";
  * 
  * 
  * https://i.ibb.co/L0dS41s/host-car.jpg
-
-
-https://i.ibb.co/ggs11Mp/service-bike.png
-https://i.ibb.co/Hn8YXy1/service-bike-1.png
-https://i.ibb.co/nfSWXYg/service-bike-2.png
-https://i.ibb.co/VBk34bQ/service-bike-3.png
-https://i.ibb.co/JrxqLHj/service-bike-4.png
-https://i.ibb.co/kJMvytM/service-bike-5.png
-https://i.ibb.co/wYDzqJm/service-bike-7.png
-https://i.ibb.co/4F8tczH/service-bike-8.png
-https://i.ibb.co/b2jGK2P/service-car.png
-https://i.ibb.co/d0NMF49/service-car-1.png
-https://i.ibb.co/BNzzqK4/service-car-2.png
-https://i.ibb.co/RDxSRR3/service-car-3.png
-https://i.ibb.co/KWR4Nwp/service-car-4.png
-https://i.ibb.co/d0NMF49/service-car-1.png
  */
 
 const Home = () => {

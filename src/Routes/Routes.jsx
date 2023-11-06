@@ -23,6 +23,14 @@ const Routes = createBrowserRouter([
         path: "/rent-bike",
         element: <Bikes></Bikes>,
       },
+      {
+        path: "/login",
+        element: <Bikes></Bikes>,
+      },
+      {
+        path: "/register",
+        element: <Bikes></Bikes>,
+      },
     ],
   },
 ]);

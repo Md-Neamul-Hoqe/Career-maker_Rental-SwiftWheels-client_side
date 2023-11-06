@@ -1,0 +1,106 @@
+[
+  {
+    "img": "https://i.ibb.co/ggs11Mp/service-bike.png",
+    "name": "Urban Explorer",
+    "area": "Downtown",
+    "description": "Discover the city's heart.",
+    "provider": {
+      "image": "provider3.jpg",
+      "name": "CityCycles",
+      "email": "info@citycycles.com"
+    },
+    "price": 20,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/Hn8YXy1/service-bike-1.png",
+    "name": "Mountain Trailblazer",
+    "area": "Nature Reserves",
+    "description": "Conquer the trails.",
+    "provider": {
+      "image": "provider4.jpg",
+      "name": "EcoBike Rentals",
+      "email": "info@ecobike.com"
+    },
+    "price": 30,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/nfSWXYg/service-bike-2.png",
+    "name": "Beach Breeze",
+    "area": "Coastal Routes",
+    "description": "Experience the seaside.",
+    "provider": {
+      "image": "provider7.jpg",
+      "name": "BeachCycles",
+      "email": "info@beachcycles.com"
+    },
+    "price": 25,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/VBk34bQ/service-bike-3.png",
+    "name": "Sporty Thrillseeker",
+    "area": "Adventurous Trails",
+    "description": "Fuel your adrenaline.",
+    "provider": {
+      "image": "provider8.jpg",
+      "name": "AdventureBikes",
+      "email": "info@adventurebikes.com"
+    },
+    "price": 35,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/JrxqLHj/service-bike-4.png",
+    "name": "Urban Explorer",
+    "area": "Downtown",
+    "description": "Discover the city's heart.",
+    "provider": {
+      "image": "provider3.jpg",
+      "name": "CityCycles",
+      "email": "info@citycycles.com"
+    },
+    "price": 20,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/kJMvytM/service-bike-5.png",
+    "name": "Mountain Trailblazer",
+    "area": "Nature Reserves",
+    "description": "Conquer the trails.",
+    "provider": {
+      "image": "provider4.jpg",
+      "name": "EcoBike Rentals",
+      "email": "info@ecobike.com"
+    },
+    "price": 30,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/wYDzqJm/service-bike-7.png",
+    "name": "Beach Breeze",
+    "area": "Coastal Routes",
+    "description": "Experience the seaside.",
+    "provider": {
+      "image": "provider7.jpg",
+      "name": "BeachCycles",
+      "email": "info@beachcycles.com"
+    },
+    "price": 25,
+    "status": "Available"
+  },
+  {
+    "img": "https://i.ibb.co/4F8tczH/service-bike-8.png",
+    "name": "Sporty Thrillseeker",
+    "area": "Adventurous Trails",
+    "description": "Fuel your adrenaline.",
+    "provider": {
+      "image": "provider8.jpg",
+      "name": "AdventureBikes",
+      "email": "info@adventurebikes.com"
+    },
+    "price": 35,
+    "status": "Available"
+  }
+]
