@@ -8,37 +8,19 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import auth from "../firebase/firebase.config";
 import Swal from "sweetalert2";
+import auth from "./firebase.config";
 export const AuthContext = createContext(null);
 
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [theme, setTheme] = useState(false);
+  // const [theme, setTheme] = useState(false);
   const [deletedId, setDeletedId] = useState(0);
-  const [products, setProducts] = useState([]);
 
   /* set products in the cart associated to the id in the localStorage cart */
   const [cart, setCart] = useState([]);
-  // const [favorite, setFavorite] = useState(false);
-  const dataTheme = document.getElementsByTagName("html");
-
-  useEffect(() => {
-    fetch(`https://mahogany-furniture-server.vercel.app/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
-
-  const toggleTheme = () => {
-    theme
-      ? dataTheme[0].setAttribute("data-theme", "light")
-      : dataTheme[0].setAttribute("data-theme", "dark");
-    return setTheme(!theme);
-  };
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -53,10 +35,11 @@ const AuthProviders = ({ children }) => {
   const logOut = () => {
     setLoading(true);
 
-    const loggingOut = signOut(auth).then((res) => {
+    console.log("Logging Out");
+    signOut(auth).then((res) => {
       if (!res)
         Swal.fire({
-          title: "Log out successfully.(Firebase)",
+          title: "Log out successfully.",
           showClass: {
             popup: "animate__animated animate__fadeInDown",
           },
@@ -66,7 +49,7 @@ const AuthProviders = ({ children }) => {
         });
     });
 
-    return () => loggingOut();
+    // return () => loggingOut();
   };
 
   const signInGoogle = () => {
@@ -98,6 +81,8 @@ const AuthProviders = ({ children }) => {
     const userState = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
+      console.log(currentUser);
+
       setLoading(false);
     });
 
@@ -107,17 +92,17 @@ const AuthProviders = ({ children }) => {
   }, []);
 
   /* Get Cart from DB */
-  useEffect(() => {
-    fetch(`https://mahogany-furniture-server.vercel.app/cart`)
-      .then((res) => res.json())
-      .then((cartDB) => {
-        if (typeof cartDB === "object" && cartDB.length)
-          setCart([
-            ...cartDB.filter((product) => product.email === user?.email),
-          ]);
-      })
-      .catch((error) => console.error(error));
-  }, [user?.email]);
+  // useEffect(() => {
+  //   fetch(`https://mahogany-furniture-server.vercel.app/cart`)
+  //     .then((res) => res.json())
+  //     .then((cartDB) => {
+  //       if (typeof cartDB === "object" && cartDB.length)
+  //         setCart([
+  //           ...cartDB.filter((product) => product.email === user?.email),
+  //         ]);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, [user?.email]);
 
   const handleRemoveFromCart = (id, purchase) => {
     if (!purchase)
@@ -132,29 +117,27 @@ const AuthProviders = ({ children }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           /* Remove from DB */
-          fetch(`https://mahogany-furniture-server.vercel.app/cart/${id}`, {
-            method: "DELETE",
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              // console.log(data);
-
-              if (data.deletedCount) {
-                // visual cart remove
-                const remainingCart = cart.filter(
-                  (product) => product._id !== id
-                );
-                setCart(remainingCart);
-                // remove from LS
-                // removeFromLS(id);
-
-                Swal.fire(
-                  "Deleted!",
-                  "The product is removed from cart successfully.",
-                  "success"
-                );
-              }
-            });
+          // fetch(`https://mahogany-furniture-server.vercel.app/cart/${id}`, {
+          //   method: "DELETE",
+          // })
+          //   .then((res) => res.json())
+          //   .then((data) => {
+          //     // console.log(data);
+          //     if (data.deletedCount) {
+          //       // visual cart remove
+          //       const remainingCart = cart.filter(
+          //         (product) => product._id !== id
+          //       );
+          //       setCart(remainingCart);
+          //       // remove from LS
+          //       // removeFromLS(id);
+          //       Swal.fire(
+          //         "Deleted!",
+          //         "The product is removed from cart successfully.",
+          //         "success"
+          //       );
+          //     }
+          //   });
         }
       });
   };
@@ -179,31 +162,31 @@ const AuthProviders = ({ children }) => {
         cart[idxOfTheProduct].purchase = purchase;
       }
 
-      fetch(
-        `https://mahogany-furniture-server.vercel.app/cart/${product._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(product),
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.modifiedCount || data.upsertedCount)
-            Swal.fire({
-              title: `You selected ${product.purchase} pics of the product successfully.`,
+      // fetch(
+      //   `https://mahogany-furniture-server.vercel.app/cart/${product._id}`,
+      //   {
+      //     method: "PATCH",
+      //     headers: {
+      //       "content-type": "application/json",
+      //     },
+      //     body: JSON.stringify(product),
+      //   }
+      // )
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     if (data.modifiedCount || data.upsertedCount)
+      //       Swal.fire({
+      //         title: `You selected ${product.purchase} pics of the product successfully.`,
 
-              showClass: {
-                popup: "animate__animated animate__fadeInDown",
-              },
+      //         showClass: {
+      //           popup: "animate__animated animate__fadeInDown",
+      //         },
 
-              hideClass: {
-                popup: "animate__animated animate__fadeOutUp",
-              },
-            });
-        });
+      //         hideClass: {
+      //           popup: "animate__animated animate__fadeOutUp",
+      //         },
+      //       });
+      //   });
     } else {
       /* for local state */
       // const newProductInCart = {
@@ -218,26 +201,26 @@ const AuthProviders = ({ children }) => {
       setCart(newCart);
 
       /* For database */
-      fetch(`https://mahogany-furniture-server.vercel.app/cart`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(product),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.acknowledged)
-            Swal.fire({
-              title: "The product added to your cart successfully.",
-              showClass: {
-                popup: "animate__animated animate__fadeInDown",
-              },
-              hideClass: {
-                popup: "animate__animated animate__fadeOutUp",
-              },
-            });
-        });
+      // fetch(`https://mahogany-furniture-server.vercel.app/cart`, {
+      //   method: "POST",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(product),
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     if (data.acknowledged)
+      //       Swal.fire({
+      //         title: "The product added to your cart successfully.",
+      //         showClass: {
+      //           popup: "animate__animated animate__fadeInDown",
+      //         },
+      //         hideClass: {
+      //           popup: "animate__animated animate__fadeOutUp",
+      //         },
+      //       });
+      //   });
     }
 
     /* Set product id to the LS */
@@ -254,11 +237,8 @@ const AuthProviders = ({ children }) => {
     //     },
     //   });
   };
-  const updateProducts = (id) => {
-    setProducts(products.filter((product) => product._id !== id));
-  };
 
-  const userInfo = {
+  const authInfo = {
     user,
     signIn,
     setUser,
@@ -266,10 +246,8 @@ const AuthProviders = ({ children }) => {
     signInGoogle,
     loading,
     setLoading,
-    toggleTheme,
     error,
     setError,
-    theme,
     logOut,
     deletedId,
     setDeletedId,
@@ -277,12 +255,10 @@ const AuthProviders = ({ children }) => {
     setCart,
     handleRemoveFromCart,
     handleAddToCart,
-    products,
-    setProducts,
-    updateProducts,
   };
+
   return (
-    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
 

@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { AuthContext } from "../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import ContextProvider from "../../Auth/ContextProvider";
 
 const SignUp = () => {
-  const { createUser, error, setError, signInGoogle } = useContext(AuthContext);
+  const { createUser, error, setError, signInGoogle } = ContextProvider();
 
   const navigate = useNavigate();
 
@@ -45,7 +44,7 @@ const SignUp = () => {
 
         setTimeout(() => {
           Swal.fire({
-            title: "User created successfully.",
+            title: "Your new account created successfully.",
             showClass: {
               popup: "animate__animated animate__fadeInDown",
             },
@@ -58,23 +57,23 @@ const SignUp = () => {
         /* navigate after Registration */
         location?.state ? navigate(location?.state) : navigate("/");
 
-        fetch("https://mahogany-furniture-server.vercel.app/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
+        // fetch("https://mahogany-furniture-server.vercel.app/users", {
+        //   method: "POST",
+        //   headers: {
+        //     "content-type": "application/json",
+        //   },
+        //   body: JSON.stringify(user),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     // console.log(data);
 
-            if (data?.insertedId) {
-              console.log("User info stored in database successfully.");
-            } else {
-              console.log("Database connection lost.");
-            }
-          });
+        //     if (data?.insertedId) {
+        //       console.log("User info stored in database successfully.");
+        //     } else {
+        //       console.log("Database connection lost.");
+        //     }
+        //   });
       })
       .catch((error) => setError(error));
   };
@@ -129,6 +128,20 @@ const SignUp = () => {
                 required
               />
             </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text max-md:text-white font-semibold">
+                  Your Photo URL
+                </span>
+              </label>
+              <input
+                type="url"
+                name="url"
+                placeholder="Enter your photo URL"
+                className="input input-bordered bg-light mt-4 mb-6"
+                required
+              />
+            </div>
             <div className="form-control mt-6 flex flex-row gap-2 text-base">
               <input
                 type="checkbox"
@@ -148,7 +161,7 @@ const SignUp = () => {
 
             <div className="form-control mt-6 flex md:flex-row md:gap-2 text-base">
               Already have an account?{" "}
-              <Link className="text-primary font-bold" to="/SignIn">
+              <Link className="text-primary font-bold" to="/signIn">
                 Sign In
               </Link>
             </div>
@@ -172,9 +185,9 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-      <Helmet>
+      {/* <Helmet>
         <title>{"Mahogany | Sign Up"}</title>
-      </Helmet>
+      </Helmet> */}
     </section>
   );
 };

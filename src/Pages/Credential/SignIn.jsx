@@ -1,13 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
-import { useContext } from "react";
 import Swal from "sweetalert2";
+import ContextProvider from "../../Auth/ContextProvider";
+import axios from "axios";
 
 const SignIn = () => {
   const { user, setUser, error, setError, signIn, signInGoogle } =
-    useContext(AuthContext);
+    ContextProvider();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ const SignIn = () => {
         setUser(res.user);
         // console.log(location);
 
-        e.target.reset();
+        // e.target.reset();
 
         /* data to be updated */
-        const user = {
-          email,
-          lastSignInAt: res.user?.metadata?.lastSignInTime,
-        };
+        // const user = {
+        //   email,
+        //   lastSignInAt: res.user?.metadata?.lastSignInTime,
+        // };
 
         setError("");
 
@@ -53,24 +53,17 @@ const SignIn = () => {
         /* navigate after login */
         location?.state ? navigate(location?.state) : navigate("/");
 
-        /* Update user information */
-        fetch("https://mahogany-furniture-server.vercel.app/users", {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
+        /* Update user information to database */
+        // axios
+        //   .patch("https://mahogany-furniture-server.vercel.app/users", user)
+        //   .then((res) => {
 
-            if (data.modifiedCount) {
-              setTimeout(() => {
-                console.log("User info updated in database successfully.");
-              }, 2500);
-            }
-          });
+        //     if (res.data.modifiedCount) {
+        //       setTimeout(() => {
+        //         console.log("User info updated in database successfully.");
+        //       }, 2500);
+        //     }
+        //   });
       })
       .catch((error) => {
         return setError(error.message);
@@ -123,7 +116,7 @@ const SignIn = () => {
           {/* go to register page */}
           <div className="text-center pt-7">
             <span>Don&apos;t have an account?</span>
-            <Link to="/SignUp" className="link link-hover text-primary ps-2">
+            <Link to="/signUp" className="link link-hover text-primary ps-2">
               Sign Up A New Account
             </Link>
           </div>
@@ -160,9 +153,9 @@ const SignIn = () => {
         </form>
       </div>
 
-      <Helmet>
+      {/* <Helmet>
         <title>{"Mahogany | Sign In"}</title>
-      </Helmet>
+      </Helmet> */}
     </div>
   );
 };

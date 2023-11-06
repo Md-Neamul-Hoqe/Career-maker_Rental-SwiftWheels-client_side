@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import axios from "axios";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
@@ -54,6 +54,13 @@ const Popular = () => {
           ))}
         </div>
       )}
+
+      <div className="w-full flex justify-center">
+        <Link className="btn bg-black text-white" to="/rent-bike">
+          Show More Bikes
+        </Link>
+      </div>
+
       <Heading3>Popular Cars</Heading3>
       {!cars?.length || typeof cars === "string" ? (
         <div className="min-h-screen flex justify-center items-center w-full">
@@ -80,6 +87,12 @@ const Popular = () => {
           ))}
         </div>
       )}
+
+      <div className="w-full flex justify-center">
+        <Link className="btn bg-black text-white" to="/rent-car">
+          Show More Cars
+        </Link>
+      </div>
     </MaxWidthSection>
   );
 };

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const PopularService = (props) => {
-  const { _id, img, name, provider, price } = props?.bike
+  const { _id, img, name, description, provider, price } = props?.bike
     ? props.bike
     : props.car;
 
@@ -12,9 +12,15 @@ const PopularService = (props) => {
       <figure>
         <img className="mt-5 rounded-lg" src={img} alt={name} />
       </figure>
-      <div className="card-body space-y-5 text-gray-500">
-        <h2 className="card-title text-black">{name}</h2>
 
+      <div className="card-body space-y-5 text-gray-500">
+        {/* Service Info */}
+        <div>
+          <h2 className="card-title text-black">{name}</h2>
+          <p>{description}</p>
+        </div>
+
+        {/* Provider Info */}
         <div className="flex justify-start items-center gap-5 border rounded p-1">
           <img className="w-16" src={provider?.image} alt={provider?.name} />
           <div>
@@ -25,6 +31,7 @@ const PopularService = (props) => {
           </div>
         </div>
 
+        {/* Price & Action */}
         <div className="card-actions justify-between items-end">
           <div className="flex flex-col">
             <label htmlFor="price">Per Hours</label>

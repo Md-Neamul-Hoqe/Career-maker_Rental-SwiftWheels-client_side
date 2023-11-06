@@ -1,10 +1,12 @@
 import PropType from "prop-types";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import ContextProvider from "../../../Auth/ContextProvider";
 
 const Navbar = () => {
   const location = useLocation();
+  const { user, logOut } = ContextProvider();
 
-  console.log(location?.pathname, location?.pathname === "/");
+  console.log(user);
 
   const NavLinks = (
     <>
@@ -14,7 +16,7 @@ const Navbar = () => {
       <li tabIndex={0}>
         <details>
           <summary>Services</summary>
-          <ul className="p-2 rounded-none join join-vertical bg-gray-600 border border-white">
+          <ul className="p-2 rounded-none join join-vertical bg-gray-600 text-gray-300 border border-white">
             <li>
               <NavLink to="/rent-car" className="whitespace-nowrap join-item">
                 Rent Car
@@ -28,25 +30,26 @@ const Navbar = () => {
           </ul>
         </details>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
       <li tabIndex={0}>
         <details>
           <summary>Dashboard</summary>
-          <ul className="p-2 rounded-none join join-vertical bg-gray-600 border border-white">
+          <ul className="p-2 rounded-none join join-vertical bg-gray-600 text-gray-300 border border-white">
             <li>
-              <NavLink to="" className="whitespace-nowrap join-item">
+              <NavLink
+                to="/add-service"
+                className="whitespace-nowrap join-item">
                 Add Service
               </NavLink>
             </li>
             <li>
-              <NavLink to="" className="whitespace-nowrap join-item">
+              <NavLink
+                to="/my-services"
+                className="whitespace-nowrap join-item">
                 My Services
               </NavLink>
             </li>
             <li>
-              <NavLink to="" className="whitespace-nowrap join-item">
+              <NavLink to="/schedules" className="whitespace-nowrap join-item">
                 My Schedules
               </NavLink>
             </li>
@@ -83,41 +86,46 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52">
+              className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-black text-white rounded-box w-52">
               {NavLinks}
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-xl">SwiftWheels</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
+          <ul className="menu menu-horizontal px-1 z-50">{NavLinks}</ul>
         </div>
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
-            <div className="flex items-center gap-5">
-              <h4>Md. Neamul Hoqe</h4>
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img src="https://i.ibb.co/7vx2MGG/user-1.png" />
+            {user?.email ? (
+              <>
+                <div className="flex items-center gap-5">
+                  <h4>
+                    {user?.displayName
+                      ? user.displayName
+                      : user.email.split("@")[0]}
+                  </h4>
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                      {user?.photoURL ? (
+                        <img src={user.photoURL} />
+                      ) : (
+                        <img src="https://i.ibb.co/7vx2MGG/user-1.png" />
+                      )}
+                    </div>
+                  </label>
+                  <button className="btn bg-black text-white" onClick={logOut}>
+                    Logout
+                  </button>
                 </div>
-              </label>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black rounded-box w-52">
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+              </>
+            ) : (
+              <Link className="btn bg-black text-white" to="/signIn">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

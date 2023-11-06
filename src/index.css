@@ -6,6 +6,10 @@
   @apply border-2 border-red-500 text-red-500 font-semibold !important;
 }
 
+.btn {
+  @apply capitalize;
+}
+
 body {
   @apply max-w-[1920px] mx-auto;
 }
