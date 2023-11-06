@@ -1,6 +1,11 @@
 import PropType from "prop-types";
-import { Link, NavLink } from "react-router-dom";
-const Navbar = ({ inHome }) => {
+import { Link, NavLink, useLocation } from "react-router-dom";
+
+const Navbar = () => {
+  const location = useLocation();
+
+  console.log(location?.pathname, location?.pathname === "/");
+
   const NavLinks = (
     <>
       <li>
@@ -52,11 +57,13 @@ const Navbar = ({ inHome }) => {
   );
 
   return (
-    <div
-      className={`${
-        inHome ? "bg-black text-white" : "bg-white text-black"
-      } h-16 flex items-center`}>
-      <div className="navbar bg-base-100">
+    <div>
+      <div
+        className={`${
+          location?.pathname === "/"
+            ? "bg-[#0e0e0e] text-white"
+            : "bg-white text-[#0e0e0e]"
+        } navbar`}>
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

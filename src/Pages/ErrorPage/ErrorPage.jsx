@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -9,7 +9,7 @@ const ErrorPage = () => {
   console.log(error);
   return (
     <>
-      <Navbar inHome={true} />
+      <Navbar />
       <section className="min-h-[calc(100vh-220px)] flex flex-col items-center gap-5 text-black text-xl">
         <figure className="mt-20">
           <img
