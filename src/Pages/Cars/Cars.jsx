@@ -5,18 +5,19 @@ import Service from "../Shared/Service/Service";
 
 const Cars = () => {
   const [cars, setCars] = useState([]);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     axios
       .get("/cars.json")
       .then((res) => setCars(res.data))
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error));
   }, []);
 
   return (
     <>
       <Banner />
-      Cars Showcase : {cars.length}
+      
       {!cars?.length || typeof cars === "string" ? (
         <div className="min-h-screen flex justify-center items-center w-full">
           <span className="loading loading-infinity w-40 text-primary"></span>
@@ -26,7 +27,7 @@ const Cars = () => {
               <details className="text-white text-sm w-full">
                 <summary>For Developers:</summary>
                 <div>
-                  <p>{error?.error?.message}</p>
+                  <p>{error?.message}</p>
                 </div>
               </details>
             </>

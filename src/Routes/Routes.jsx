@@ -9,6 +9,7 @@ import SignUp from "../Pages/Credential/SignUp";
 import AddService from "../Pages/AddService/AddService";
 import MyServices from "../Pages/MyServices/MyServices";
 import Schedules from "../Pages/Schedules/Schedules";
+import Details from "../Pages/Details/Details";
 
 const Routes = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const Routes = createBrowserRouter([
       {
         path: "rent-bike",
         element: <Bikes></Bikes>,
+      },
+      {
+        path: "services/:id",
+        element: <Details></Details>,
+        loader: ({ params }) => fetch(`/${params.id}`),
       },
       {
         path: "add-service",

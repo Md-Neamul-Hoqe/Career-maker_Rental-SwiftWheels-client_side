@@ -16,16 +16,16 @@ const Service = (props) => {
     specifications,
   } = props?.bike || props?.car;
 
-  console.log(
-    img,
-    name,
-    area,
-    description,
-    provider,
-    price,
-    status,
-    specifications
-  );
+  // console.log(
+  //   img,
+  //   name,
+  //   area,
+  //   description,
+  //   provider,
+  //   price,
+  //   status,
+  //   specifications
+  // );
 
   return (
     <div className="card card-compact card-bordered bg-base-100">
@@ -34,14 +34,13 @@ const Service = (props) => {
       </figure>
       <div className="card-body space-y-5 text-gray-500">
         <h2 className="card-title text-black">{name}</h2>
-        <div className="grid grid-cols-2">
-          {Object.keys(specifications).map((prop) => (
-            <p key={_id} className="flex">
-              {prop}: {specifications[prop]}
-            </p>
-          ))}
+        <div>
+          <p>Service Area: {area}</p>
+          <p>Service Description: {description}</p>
+          <p>Service Status: {status}</p>
         </div>
-        <div className="card-actions justify-between items-end">
+
+        <div className="card-actions justify-between items-end grow">
           <div className="flex flex-col">
             <label htmlFor="price">Per Hours</label>
             <input

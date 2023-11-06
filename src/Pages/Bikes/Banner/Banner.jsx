@@ -1,4 +1,5 @@
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
+import Search from "../../Shared/Search/Search";
 
 /**
  * Banners Image
@@ -19,6 +20,9 @@ const Banner = () => {
           <h1 className="text-5xl text-white font-bold leading-snug">
             Rent Bikes
           </h1>
+        </div>
+        <div className="relative w-full h-10">
+          <Search />
         </div>
       </MaxWidthSection>
     </section>
