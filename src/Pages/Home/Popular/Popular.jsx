@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useRouteError } from "react-router-dom";
 import Heading3 from "../../Shared/Heading3/Heading3";
-import axios from "axios";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import PopularService from "./PopularService";
+import useAxios from "../../../Hooks/useAxios";
 
 const Popular = () => {
+  const axios = useAxios();
   const error = useRouteError();
 
   const [bikes, setBikes] = useState([]);
@@ -15,7 +16,7 @@ const Popular = () => {
       .get("/bikes.json")
       .then((res) => setBikes(res.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [axios]);
 
   const [cars, setCars] = useState([]);
 
@@ -24,7 +25,7 @@ const Popular = () => {
       .get("/cars.json")
       .then((res) => setCars(res.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [axios]);
 
   return (
     <MaxWidthSection>

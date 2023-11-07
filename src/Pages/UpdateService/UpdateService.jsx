@@ -2,11 +2,11 @@ import Heading3 from "../Shared/Heading3/Heading3";
 import ContextProvider from "../../Hooks/ContextProvider";
 import useAxios from "../../Hooks/useAxios";
 
-const AddService = () => {
-  const axios = useAxios();
+const UpdateService = () => {
+    const axios = useAxios();
   const { user } = ContextProvider();
 
-  const handleAddProduct = (e) => {
+  const handleUpdateService = (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -48,15 +48,6 @@ const AddService = () => {
       .post("http://localhost:5000/services", car)
       .then((res) => console.log(res.data));
 
-    // fetch("http://localhost:5000/services", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(car),
-    // })
-    //   .then((res) => res.json())
-    //   .then(console.log);
   };
 
   return (
@@ -68,7 +59,7 @@ const AddService = () => {
       <section>
         <div className="card w-full border mb-24">
           <form
-            onSubmit={handleAddProduct}
+            onSubmit={handleUpdateService}
             className="card-body flex-col gap-6 bg-form-bg p-24">
             <Heading3>Add A Service</Heading3>
             <div className="flex justify-between gap-6">
@@ -200,4 +191,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateService;

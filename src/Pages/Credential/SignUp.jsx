@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import ContextProvider from "../../Auth/ContextProvider";
+import ContextProvider from "../../Hooks/ContextProvider";
 
 const SignUp = () => {
   const { createUser, error, setError, signInGoogle } = ContextProvider();

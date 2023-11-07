@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
-import ContextProvider from "../../Auth/ContextProvider";
-import axios from "axios";
+import ContextProvider from "../../Hooks/ContextProvider";
+import useAxios from "../../Hooks/useAxios";
 
 const SignIn = () => {
+  const axios = useAxios();
   const { user, setUser, error, setError, signIn, signInGoogle } =
     ContextProvider();
 
@@ -54,16 +55,16 @@ const SignIn = () => {
         location?.state ? navigate(location?.state) : navigate("/");
 
         /* Update user information to database */
-        // axios
-        //   .patch("https://mahogany-furniture-server.vercel.app/users", user)
-        //   .then((res) => {
+        axios
+          .patch("/users", user)
+          .then((res) => {
 
-        //     if (res.data.modifiedCount) {
-        //       setTimeout(() => {
-        //         console.log("User info updated in database successfully.");
-        //       }, 2500);
-        //     }
-        //   });
+            if (res.data.modifiedCount) {
+              setTimeout(() => {
+                console.log("User info updated in database successfully.");
+              }, 2500);
+            }
+          });
       })
       .catch((error) => {
         return setError(error.message);

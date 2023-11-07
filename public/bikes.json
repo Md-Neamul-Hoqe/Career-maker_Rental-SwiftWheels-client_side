@@ -1,5 +1,6 @@
 [
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/ggs11Mp/service-bike.png",
     "name": "Urban Explorer",
     "area": "Downtown",
@@ -11,8 +12,7 @@
     },
     "price": 20,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Petrol",
       "frontBrake": "Disc",
@@ -24,6 +24,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/Hn8YXy1/service-bike-1.png",
     "name": "Mountain Trailblazer",
     "area": "Nature Reserves",
@@ -35,8 +36,7 @@
     },
     "price": 30,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Petrol",
       "frontBrake": "Disc",
@@ -48,6 +48,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/nfSWXYg/service-bike-2.png",
     "name": "Beach Breeze",
     "area": "Coastal Routes",
@@ -59,8 +60,7 @@
     },
     "price": 25,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Petrol",
       "frontBrake": "Disc",
@@ -72,6 +72,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/VBk34bQ/service-bike-3.png",
     "name": "Sporty Thrillseeker",
     "area": "Adventurous Trails",
@@ -83,8 +84,7 @@
     },
     "price": 35,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Petrol",
       "frontBrake": "Disc",
@@ -96,6 +96,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/JrxqLHj/service-bike-4.png",
     "name": "Urban Explorer",
     "area": "Downtown",
@@ -107,8 +108,7 @@
     },
     "price": 20,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Electric",
       "frontBrake": "Disc",
@@ -120,6 +120,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/kJMvytM/service-bike-5.png",
     "name": "Mountain Trailblazer",
     "area": "Nature Reserves",
@@ -131,8 +132,7 @@
     },
     "price": 30,
     "status": "Available",
-    "specifications": 
-    {
+    "specifications": {
       "seats": 2,
       "fuel": "Petrol",
       "frontBrake": "Disc",
@@ -144,6 +144,7 @@
     }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/wYDzqJm/service-bike-7.png",
     "name": "Beach Breeze",
     "area": "Coastal Routes",
@@ -156,17 +157,18 @@
     "price": 25,
     "status": "Available",
     "specifications": {
-        "seats": 2,
-        "fuel": "Petrol",
-        "frontBrake": "Disc",
-        "gearBox": "6-Speed",
-        "horsepower": "40 HP",
-        "engine": "4-Stroke, V-Twin",
-        "stroke": "5 inches",
-        "overallMileage": "45 mpg"
-      }
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "6-Speed",
+      "horsepower": "40 HP",
+      "engine": "4-Stroke, V-Twin",
+      "stroke": "5 inches",
+      "overallMileage": "45 mpg"
+    }
   },
   {
+    "type": "bikes",
     "img": "https://i.ibb.co/4F8tczH/service-bike-8.png",
     "name": "Sporty Thrillseeker",
     "area": "Adventurous Trails",
@@ -178,15 +180,15 @@
     },
     "price": 35,
     "status": "Available",
-    "specifications":  {
-        "seats": 2,
-        "fuel": "Petrol",
-        "frontBrake": "Disc",
-        "gearBox": "5-Speed",
-        "horsepower": "30 HP",
-        "engine": "4-Stroke, Single Cylinder",
-        "stroke": "4.2 inches",
-        "overallMileage": "60 mpg"
-      }
+    "specifications": {
+      "seats": 2,
+      "fuel": "Petrol",
+      "frontBrake": "Disc",
+      "gearBox": "5-Speed",
+      "horsepower": "30 HP",
+      "engine": "4-Stroke, Single Cylinder",
+      "stroke": "4.2 inches",
+      "overallMileage": "60 mpg"
+    }
   }
 ]

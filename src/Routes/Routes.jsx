@@ -10,6 +10,7 @@ import AddService from "../Pages/AddService/AddService";
 import MyServices from "../Pages/MyServices/MyServices";
 import Schedules from "../Pages/Schedules/Schedules";
 import Details from "../Pages/Details/Details";
+import UpdateService from "../Pages/UpdateService/UpdateService";
 
 const Routes = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ const Routes = createBrowserRouter([
       {
         path: "add-service",
         element: <AddService></AddService>,
+      },
+      {
+        path: "update-service/:id",
+        element: <UpdateService></UpdateService>,
+        loader: () => fetch('')
       },
       {
         path: "my-services",

@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
+import useAxios from "../../Hooks/useAxios";
 
 const Cars = () => {
+  const axios = useAxios();
   const [cars, setCars] = useState([]);
   const [error, setError] = useState([]);
 
@@ -12,7 +13,7 @@ const Cars = () => {
       .get("/cars.json")
       .then((res) => setCars(res.data))
       .catch((error) => setError(error));
-  }, []);
+  }, [axios]);
 
   return (
     <>

@@ -1,10 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
 import { useRouteError } from "react-router-dom";
+import useAxios from "../../Hooks/useAxios";
 
 const Bikes = () => {
+  const axios = useAxios();
   const error = useRouteError();
 
   const [bikes, setBikes] = useState([]);
@@ -14,7 +15,7 @@ const Bikes = () => {
       .get("/bikes.json")
       .then((res) => setBikes(res.data))
       .catch((error) => console.log(error));
-  }, []);
+  }, [axios]);
 
   return (
     <>

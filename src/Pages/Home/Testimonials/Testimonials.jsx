@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
-import axios from "axios";
 import P from "../../Shared/P/P";
+import useAxios from "../../../Hooks/useAxios";
 
 const Testimonials = () => {
+  const axios = useAxios();
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const Testimonials = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [axios]);
 
   return (
     <div className="my-20">

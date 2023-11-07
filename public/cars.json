@@ -1,5 +1,6 @@
 [
   {
+    "type": "cars",
     "img": "https://i.ibb.co/b2jGK2P/service-car.png",
     "name": "Sedan Sensation",
     "area": "City Center",
@@ -23,6 +24,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
     "name": "Family Voyager",
     "area": "Suburbs",
@@ -46,6 +48,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/BNzzqK4/service-car-2.png",
     "name": "Luxury Elegance",
     "area": "Luxury District",
@@ -69,6 +72,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/RDxSRR3/service-car-3.png",
     "name": "Compact Cruiser",
     "area": "Airport Zone",
@@ -92,6 +96,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/KWR4Nwp/service-car-4.png",
     "name": "Sedan Sensation",
     "area": "City Center",
@@ -115,6 +120,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/b2jGK2P/service-car.png",
     "name": "Family Voyager",
     "area": "Suburbs",
@@ -138,6 +144,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
     "name": "Luxury Elegance",
     "area": "Luxury District",
@@ -161,6 +168,7 @@
     }
   },
   {
+    "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
     "name": "Compact Cruiser",
     "area": "Airport Zone",

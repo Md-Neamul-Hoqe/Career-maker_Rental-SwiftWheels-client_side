@@ -1,6 +1,6 @@
 import PropType from "prop-types";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import ContextProvider from "../../../Auth/ContextProvider";
+import ContextProvider from "../../../Hooks/ContextProvider";
 
 const Navbar = () => {
   const location = useLocation();
