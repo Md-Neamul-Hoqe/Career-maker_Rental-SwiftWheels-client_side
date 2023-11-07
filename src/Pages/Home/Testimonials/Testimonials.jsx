@@ -10,7 +10,7 @@ const Testimonials = () => {
 
   useEffect(() => {
     axios
-      .get("/testimonials.json")
+      .get("/testimonials")
       .then((response) => {
         setComments(response.data);
       })

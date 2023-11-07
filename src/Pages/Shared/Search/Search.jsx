@@ -23,10 +23,7 @@ const Search = (props) => {
       <select
         name="type"
         className="select select-bordered w-full max-w-xs join-item">
-        <option disabled selected>
-          Select Type
-        </option>
-        <option value="cars">Car</option>
+        <option defaultValue="cars">Car</option>
         <option value="bikes">Bike</option>
       </select>
       <button type="submit" className="btn join-item">

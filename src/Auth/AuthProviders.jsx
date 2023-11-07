@@ -81,7 +81,7 @@ const AuthProviders = ({ children }) => {
     const userState = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      console.log(currentUser);
+      console.log('current user: ',currentUser);
 
       setLoading(false);
     });

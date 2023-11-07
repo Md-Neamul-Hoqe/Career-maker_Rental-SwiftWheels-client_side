@@ -1,9 +1,13 @@
 import Heading3 from "../Shared/Heading3/Heading3";
 import ContextProvider from "../../Hooks/ContextProvider";
 import useAxios from "../../Hooks/useAxios";
+import { useParams } from "react-router-dom";
 
 const UpdateService = () => {
-    const axios = useAxios();
+  const id = useParams();
+  console.log(id);
+  
+  const axios = useAxios();
   const { user } = ContextProvider();
 
   const handleUpdateService = (e) => {
@@ -45,9 +49,8 @@ const UpdateService = () => {
     };
 
     axios
-      .post("http://localhost:5000/services", car)
+      .post(`/update-service/${_id}`, car)
       .then((res) => console.log(res.data));
-
   };
 
   return (

@@ -2,30 +2,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Service = (props) => {
-  console.log(props);
+  const { _id, img, name, area, description, price, status } =
+    props?.bike || props?.car;
 
-  const {
-    _id,
-    img,
-    name,
-    area,
-    description,
-    provider,
-    price,
-    status,
-    specifications,
-  } = props?.bike || props?.car;
-
-  // console.log(
-  //   img,
-  //   name,
-  //   area,
-  //   description,
-  //   provider,
-  //   price,
-  //   status,
-  //   specifications
-  // );
+  console.log(_id, img, name, area, description, price, status);
 
   return (
     <div className="card card-compact card-bordered bg-base-100">
@@ -50,7 +30,7 @@ const Service = (props) => {
             />
           </div>
           <Link
-            to={`/services/:${_id}`}
+            to={`/services/${_id}?type=${props?.bike ? "bikes" : "cars"}`}
             className="btn btn-sm rounded bg-black text-white capitalize">
             {props?.bike ? "Rent Bike" : "Rent Car"}
           </Link>

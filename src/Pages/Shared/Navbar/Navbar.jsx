@@ -6,7 +6,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logOut } = ContextProvider();
 
-  console.log(user);
+  // console.log(user);
 
   const NavLinks = (
     <>

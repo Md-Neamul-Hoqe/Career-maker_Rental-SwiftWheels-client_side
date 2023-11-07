@@ -33,7 +33,6 @@ const Routes = createBrowserRouter([
       {
         path: "services/:id",
         element: <Details></Details>,
-        loader: ({ params }) => fetch(`/${params.id}`),
       },
       {
         path: "add-service",
@@ -42,7 +41,6 @@ const Routes = createBrowserRouter([
       {
         path: "update-service/:id",
         element: <UpdateService></UpdateService>,
-        loader: () => fetch('')
       },
       {
         path: "my-services",
