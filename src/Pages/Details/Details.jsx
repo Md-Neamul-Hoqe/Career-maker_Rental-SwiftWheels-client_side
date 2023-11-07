@@ -5,7 +5,6 @@ import car from "../../images/bg/car-specification.png";
 import { useEffect, useState } from "react";
 import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../Shared/Heading3/Heading3";
-import Service from "../Shared/Service/Service";
 
 const Details = () => {
   const axios = useAxios();

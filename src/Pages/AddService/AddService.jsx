@@ -1,30 +1,64 @@
 import Heading3 from "../Shared/Heading3/Heading3";
 import ContextProvider from "../../Hooks/ContextProvider";
 import useAxios from "../../Hooks/useAxios";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddService = () => {
   const axios = useAxios();
   const { user } = ContextProvider();
+  // const [car, setCar] = useState(null);
+  // const [allFieldsFilled, setAllFieldsFilled] = useState(true);
 
   const handleAddProduct = (e) => {
     e.preventDefault();
 
-    const form = e.target;
+    let allFieldsFilled = true;
 
-    const type = form.type.value;
-    const title = form.title.value;
-    const status = form.status.value;
-    const price = form.price.value;
-    const img = form.img.value;
-    const area = form.area.value;
-    const specifications = form.specifications.value;
-    const description = form.description.value;
+    const form = new FormData(e.target);
 
-    console.log(title, price, description);
-    if (typeof specifications !== "object") return;
+    // console.log(form);
 
-    if (!user?.displayName) alert("Enter Your Name");
-    if (!user?.displayName) alert("Enter Your Name");
+    console.log(allFieldsFilled);
+    // Loop through the FormData entries
+    form.forEach((value) => {
+      if (value.trim() === "") {
+        allFieldsFilled = false;
+        // setAllFieldsFilled(false);
+      }
+    });
+
+    if (!allFieldsFilled) {
+      return new Swal({
+        icon: "warning",
+        text: "Please fill all the fields",
+        title: "warning",
+      });
+    }
+
+    // console.log(allFieldsFilled);
+    // return;
+
+    const type = form.get("type");
+    const title = form.get("title");
+    const status = form.get("status");
+    const price = form.get("price");
+    const img = form.get("img");
+    const area = form.get("area");
+    const specifications = form.get("specifications");
+    const description = form.get("description");
+
+    console.log(typeof specifications);
+    if (typeof specifications !== "string") {
+      return Swal({
+        icon: "warning",
+        text: "Please fill the specification field with proper information",
+        title: "warning",
+      });
+    }
+
+    // if (!user?.displayName) alert("Enter Your Name");
 
     const car = {
       title,
@@ -36,35 +70,35 @@ const AddService = () => {
       description,
       specifications: JSON.parse(specifications),
       provider: {
-        name: user?.displayName ? user.displayName : user?.email.split("@")[0],
-        email: user.email,
+        name: user?.displayName ? user.displayName : user?.email?.split("@")[0],
+        email: user?.email,
         image: user?.photoURL
           ? user.photoURL
           : "https://i.ibb.co/7vx2MGG/user-1.png",
       },
     };
 
-    axios
-      .post("http://localhost:5000/services", car)
-      .then((res) => console.log(res.data));
-
-    // fetch("http://localhost:5000/services", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(car),
-    // })
-    //   .then((res) => res.json())
-    //   .then(console.log);
+    allFieldsFilled && mutation.mutate(car);
+    // setCar(car);
   };
 
+  const mutation = useMutation({
+    mutationFn: (car) => {
+      return axios.post("/create-service", car);
+    },
+  });
+
+  // https://i.ibb.co/ggs11Mp/service-bike.png
+  mutation.isSuccess &&
+    new Swal({
+      icon: "success",
+      text: "Service Added successfully",
+      title: "success",
+    });
+
+  mutation.isError && new Swal({ title: mutation.error.message });
   return (
     <div>
-      {/* <Banner
-        bannerInfo={{ heading: "Add Product", breadcrumb: "Add product" }}
-      /> */}
-
       <section>
         <div className="card w-full border mb-24">
           <form
@@ -189,9 +223,16 @@ const AddService = () => {
               </div>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-red-600 border-red-600">
-                Add Product
-              </button>
+              {mutation.isPending ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                <>
+                  <button
+                    className={`btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-red-600 border-red-600`}>
+                    Add Product
+                  </button>
+                </>
+              )}
             </div>
           </form>
         </div>
