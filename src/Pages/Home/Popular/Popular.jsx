@@ -8,7 +8,7 @@ import ContextProvider from "../../../Hooks/ContextProvider";
 
 const Popular = () => {
   const axios = useAxios();
-  const { error, setError } = ContextProvider();
+  const { loading, error, setError } = ContextProvider();
 
   const [bikes, setBikes] = useState([]);
 
@@ -35,8 +35,10 @@ const Popular = () => {
         <div className="min-h-screen flex justify-center items-center w-full">
           {error ? (
             <Heading3>{error}</Heading3>
-          ) : (
+          ) : loading ? (
             <span className="loading loading-infinity w-40 text-primary"></span>
+          ) : (
+            <Heading3>No Data Found</Heading3>
           )}
         </div>
       ) : (
@@ -61,8 +63,10 @@ const Popular = () => {
         <div className="min-h-screen flex justify-center items-center w-full">
           {error ? (
             <Heading3>{error}</Heading3>
-          ) : (
+          ) : loading ? (
             <span className="loading loading-infinity w-40 text-primary"></span>
+          ) : (
+            <Heading3>No Data Found</Heading3>
           )}
         </div>
       ) : (

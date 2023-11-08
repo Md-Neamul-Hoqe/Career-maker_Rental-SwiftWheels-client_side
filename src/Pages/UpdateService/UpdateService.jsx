@@ -6,16 +6,15 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const UpdateService = () => {
-  const [service, setService] = useState();
+  const [service, setService] = useState({});
   const { id } = useParams();
-  console.log(id);
   const axios = useAxios();
   const { user, error, setError } = ContextProvider();
 
   useEffect(() => {
     axios
       .get(`/services/${id}`)
-      .then((res) => setService(res.data))
+      .then((res) => setService(...res.data))
       .catch((error) => setError(error.message));
   }, [axios, id, setError]);
 
@@ -34,10 +33,6 @@ const UpdateService = () => {
     const description = form?.description?.value;
 
     console.log(title, price, description);
-    if (typeof specifications !== "object") return;
-
-    if (!user?.displayName) alert("Enter Your Name");
-    if (!user?.displayName) alert("Enter Your Name");
 
     const car = {
       title,
@@ -57,12 +52,17 @@ const UpdateService = () => {
       },
     };
 
+    console.log(id, service?.type);
+
     axios
       .patch(`/update-service/${id}?type=${service?.type}`, car)
       .then(
         (res) => res.data.modifiedCount && Swal.fire("Updated successfully.")
       )
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        setError(error.message);
+      });
   };
 
   return (
@@ -121,7 +121,9 @@ const UpdateService = () => {
                     type="text"
                     placeholder="Service Status"
                     name="status"
-                    defaultValue={service?.statusInfo?.status}
+                    defaultValue={
+                      JSON.stringify(service?.statusInfo) || "Available"
+                    }
                     className="input input-bordered w-full"
                   />
                 </div>

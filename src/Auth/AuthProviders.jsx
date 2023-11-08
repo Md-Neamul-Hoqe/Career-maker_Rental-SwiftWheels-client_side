@@ -28,7 +28,7 @@ const AuthProviders = ({ children }) => {
         .get(`/bookings/${user?.email}`)
         .then((res) => {
           setError("");
-          setBookings(res.data);
+          setBookings(res?.data);
         })
         .catch((error) => setError(error.message));
   }, [axios, user?.email]);
@@ -83,6 +83,17 @@ const AuthProviders = ({ children }) => {
             popup: "animate__animated animate__fadeOutUp",
           },
         });
+
+        axios
+          .post("/auth/jwt", { email: result?.user?.email })
+          .then((res) => {
+            setError("");
+            console.log(res?.data);
+            // if (res?.data?.success) {
+            //   location?.state ? navigate(location?.state) : navigate("/");
+            // }
+          })
+          .catch((error) => setError(error.message));
       })
       .catch((error) => setError(error.message));
 
@@ -167,7 +178,7 @@ const AuthProviders = ({ children }) => {
     axios
       .delete(`/user/cancel-booking/${id}?email=${user?.email}`)
       .then(
-        (res) => res.data.deletedCount && Swal.fire("Deleted successfully.")
+        (res) => res?.data.deletedCount && Swal.fire("Deleted successfully.")
       )
       .catch((error) =>
         Swal.fire({
@@ -217,29 +228,6 @@ const AuthProviders = ({ children }) => {
                   )
                   .then((res) => console.log(res.data))
                   .catch((error) => console.error(error));
-                // const serviceStatus = {
-                //     $set: {
-                //         statusInfo: {
-                //             status: 'Pending',
-                //             income: booking?.totalCost,
-                //             schedule: booking?.pickUp
-                //         }
-                //     }
-                // }
-
-                // if (type === 'bikes') {
-                //     const result1 = await bikeCollection.updateOne(
-                //         query,
-                //         serviceStatus,
-                //     );
-                // }
-
-                // const result1 = await carCollection.updateOne(
-                //     query,
-                //     serviceStatus,
-                // );
-
-                // if (result1.modifiedCount) result.driverInformed = true;
               }
               Swal.fire({
                 title: "Updated!",
@@ -259,8 +247,8 @@ const AuthProviders = ({ children }) => {
       axios
         .post(`/book-service?id=${id}`, booking)
         .then((res) => {
-          console.log(res.data);
-          if (res?.data?.insertedId || res.data.index > -1) {
+          console.log(res?.data);
+          if (res?.data?.insertedId || res?.data?.index > -1) {
             const statusInfo = {
               status: "Pending",
               income: booking?.totalCost,

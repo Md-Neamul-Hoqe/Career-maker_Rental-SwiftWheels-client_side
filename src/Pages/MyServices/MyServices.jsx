@@ -6,6 +6,7 @@ import Heading3 from "../Shared/Heading3/Heading3";
 import { Link } from "react-router-dom";
 import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
 import DashboardBanner from "../Shared/DashboardBanner/DashboardBanner";
+import Swal from "sweetalert2";
 
 const MyServices = () => {
   const axios = useAxios();
@@ -19,7 +20,7 @@ const MyServices = () => {
       .get(`/user/services/${user?.email}`)
       .then((res) => {
         setError("");
-        setServices(res.data);
+        setServices(res?.data);
       })
       .catch((error) => setError(error.message));
   }, [axios, user?.email, setError]);
@@ -66,7 +67,7 @@ const MyServices = () => {
                     </td>
                     <td className="text-center">
                       <Link
-                        to={`/update-service/${service._id}?type=${service?.type}`}
+                        to={`/update-service/${service._id}`}
                         className="btn bg-black text-white">
                         Edit
                       </Link>
@@ -74,9 +75,32 @@ const MyServices = () => {
                     <td className="text-center">
                       <button
                         onClick={() => {
-                          axios.delete(
-                            `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
-                          );
+                          Swal.fire({
+                            title: "Are you want to replace previous booking?",
+                            text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, delete it!",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              axios
+                                .delete(
+                                  `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
+                                )
+                                .then((res) => {
+                                  console.log(res.data);
+                                  res.data?.deletedCount &&
+                                    Swal.fire({
+                                      title: "Deleted!",
+                                      text: "Your service is deleted.",
+                                      icon: "success",
+                                    });
+                                })
+                                .catch((error) => setError(error?.message));
+                            }
+                          });
                         }}
                         className=" btn bg-red-50 text-red-600">
                         delete

@@ -7,7 +7,7 @@ import ContextProvider from "../../../Hooks/ContextProvider";
 
 const Testimonials = () => {
   const axios = useAxios();
-  const { error, setError } = ContextProvider();
+  const { loading, error, setError } = ContextProvider();
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -32,8 +32,10 @@ const Testimonials = () => {
             <div>
               {error ? (
                 <Heading3>{error}</Heading3>
+              ) : loading ? (
+                <span className="loading loading-infinity w-40 text-primary"></span>
               ) : (
-                <span className="loading loading-spinner loading-lg mx-auto"></span>
+                <Heading3>No Data Found</Heading3>
               )}
             </div>
           ) : (

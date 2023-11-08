@@ -153,13 +153,13 @@ const AddService = () => {
                     Service Type
                   </span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Service Type"
+                <select
                   name="type"
-                  defaultValue="Bike"
-                  className="input input-bordered w-full"
-                />
+                  defaultValue={"bikes"}
+                  className="select select-bordered">
+                  <option value="bikes">Bike</option>
+                  <option value="cars">Car</option>
+                </select>
               </div>
             </div>
             <div className="flex justify-between gap-6">

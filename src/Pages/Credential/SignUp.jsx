@@ -3,12 +3,14 @@ import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import ContextProvider from "../../Hooks/ContextProvider";
+import useAxios from "../../Hooks/useAxios";
 
 const SignUp = () => {
   const { createUser, error, setError, signInGoogle } = ContextProvider();
 
   const navigate = useNavigate();
 
+  const axios = useAxios();
   const handleRegister = (e) => {
     e.preventDefault();
     setError("");
@@ -16,7 +18,7 @@ const SignUp = () => {
     const Form = new FormData(e.currentTarget);
     const email = Form.get("email");
     const password = Form.get("password");
-    const name = Form.get("name");
+    // const name = Form.get("name");
     // const photo = Form.get("photo");
     const check = Form.get("check");
 
@@ -31,7 +33,7 @@ const SignUp = () => {
       return setError("Please use at least a special character.");
 
     createUser(email, password)
-      .then((res) => {
+      .then(() => {
         e.target.reset();
         setError("");
 
@@ -54,8 +56,19 @@ const SignUp = () => {
           });
         }, 2000);
 
+        axios
+          .post("/auth/jwt", { email })
+          .then((res) => {
+            setError("");
+            console.log(res?.data);
+            if (res?.data?.success) {
+              location?.state ? navigate(location?.state) : navigate("/");
+            }
+          })
+          .catch((error) => setError(error.message));
+
         /* navigate after Registration */
-        location?.state ? navigate(location?.state) : navigate("/");
+        // location?.state ? navigate(location?.state) : navigate("/");
 
         // fetch("https://mahogany-furniture-server.vercel.app/users", {
         //   method: "POST",

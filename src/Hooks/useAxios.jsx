@@ -12,14 +12,14 @@ const useAxios = () => {
 
   axiosInstance.interceptors.response.use(
     (res) => {
-      console.log(res.data);
+      // console.log(res?.data);
       return res;
     },
     (error) => {
-      if (error.response.status === 401 || error.response.status === 403) {
+      if (error?.status === 401 || error?.status === 403) {
         Swal.fire({
           title: "Error",
-          text: error.message,
+          text: error?.message,
           icon: "error",
         });
         // return logOut();
