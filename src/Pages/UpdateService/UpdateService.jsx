@@ -24,14 +24,14 @@ const UpdateService = () => {
 
     const form = e.target;
 
-    const type = form.type.value;
-    const title = form.title.value;
-    const status = form.status.value;
-    const price = form.price.value;
-    const img = form.img.value;
-    const area = form.area.value;
-    const specifications = form.specifications.value;
-    const description = form.description.value;
+    const type = form?.type?.value;
+    const title = form?.title?.value;
+    const statusInfo = form?.status?.value;
+    const price = form?.price?.value;
+    const img = form?.img?.value;
+    const area = form?.area?.value;
+    const specifications = form?.specifications?.value;
+    const description = form?.description?.value;
 
     console.log(title, price, description);
     if (typeof specifications !== "object") return;
@@ -42,7 +42,7 @@ const UpdateService = () => {
     const car = {
       title,
       price,
-      status,
+      statusInfo,
       img,
       type,
       area,

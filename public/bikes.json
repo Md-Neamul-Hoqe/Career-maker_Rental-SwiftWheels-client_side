@@ -11,7 +11,7 @@
       "email": "info@citycycles.com"
     },
     "price": 20,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -35,7 +35,7 @@
       "email": "info@ecobike.com"
     },
     "price": 30,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -59,7 +59,7 @@
       "email": "info@beachcycles.com"
     },
     "price": 25,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -83,7 +83,7 @@
       "email": "info@adventurebikes.com"
     },
     "price": 35,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -107,7 +107,7 @@
       "email": "info@citycycles.com"
     },
     "price": 20,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Electric",
@@ -131,7 +131,7 @@
       "email": "info@ecobike.com"
     },
     "price": 30,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -155,7 +155,7 @@
       "email": "info@beachcycles.com"
     },
     "price": 25,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",
@@ -179,7 +179,7 @@
       "email": "info@adventurebikes.com"
     },
     "price": 35,
-    "status": "Available",
+    "statusInfo": "Available",
     "specifications": {
       "seats": 2,
       "fuel": "Petrol",

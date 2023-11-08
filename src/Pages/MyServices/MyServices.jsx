@@ -9,7 +9,7 @@ import DashboardBanner from "../Shared/DashboardBanner/DashboardBanner";
 
 const MyServices = () => {
   const axios = useAxios();
-  const { user, setError, error } = ContextProvider();
+  const { user, setError, error, loading } = ContextProvider();
   const [services, setServices] = useState([]);
 
   console.log(`/user/services/${user?.email}`);
@@ -24,7 +24,7 @@ const MyServices = () => {
       .catch((error) => setError(error.message));
   }, [axios, user?.email, setError]);
 
-  console.log(error.length);
+  console.log(services);
   return (
     <>
       <DashboardBanner />
@@ -38,54 +38,52 @@ const MyServices = () => {
                 <th>Pick Up</th>
                 <th>Income</th>
                 <th>Status</th>
-                <th>
-                  {/* <RiDeleteBin5Line className="text-red-600 mx-auto" /> */}
-                </th>
+                <th colSpan={2}>Action</th>
               </tr>
             </thead>
             <tbody className="max-xl:flex-col min-h-[calc(100vh/3)]">
-              {services?.length ? (
-                services.map((service) =>
-                  service?.statusInfo?.income ? (
-                    <tr key={service._id}>
-                      <td className="text-center">{service._id}</td>
-                      {/* <td className="py-5">
+              {loading ? (
+                "Loading..."
+              ) : services?.length ? (
+                services.map((service) => (
+                  <tr key={service._id}>
+                    <td className="text-center">{service._id}</td>
+                    {/* <td className="py-5">
                     <img
                       className="w-20"
                       src={service?.img}
                       alt={service?.title}
                     />
                   </td> */}
-                      <td className="text-center">
-                        {service?.statusInfo?.schedule || "Not Booked"}
-                      </td>
-                      <td className="text-center">
-                        TK. {service?.statusInfo?.income || 0}
-                      </td>
-                      <td className="text-center">
-                        {service?.statusInfo?.status || "Available"}
-                      </td>
-                      <td className="text-center">
-                        <Link
-                          to={`update-service/${service._id}?type=${service?.type}`}
-                          className="btn bg-black text-white">
-                          Edit
-                        </Link>
-                      </td>
-                      <td className="text-center">
-                        <button
-                          onClick={() => {
-                            axios.delete(
-                              `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
-                            );
-                          }}
-                          className=" btn bg-red-50 text-red-600">
-                          delete
-                        </button>
-                      </td>
-                    </tr>
-                  ) : null
-                )
+                    <td className="text-center">
+                      {service?.statusInfo?.schedule || "Not Booked"}
+                    </td>
+                    <td className="text-center">
+                      TK. {service?.statusInfo?.income || 0}
+                    </td>
+                    <td className="text-center">
+                      {service?.statusInfo?.status || "Available"}
+                    </td>
+                    <td className="text-center">
+                      <Link
+                        to={`/update-service/${service._id}?type=${service?.type}`}
+                        className="btn bg-black text-white">
+                        Edit
+                      </Link>
+                    </td>
+                    <td className="text-center">
+                      <button
+                        onClick={() => {
+                          axios.delete(
+                            `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
+                          );
+                        }}
+                        className=" btn bg-red-50 text-red-600">
+                        delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td

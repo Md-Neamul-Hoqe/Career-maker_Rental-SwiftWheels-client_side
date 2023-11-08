@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 // import ContextProvider from "./ContextProvider";
 
 const axiosInstance = axios.create({
@@ -16,7 +17,11 @@ const useAxios = () => {
     },
     (error) => {
       if (error.response.status === 401 || error.response.status === 403) {
-        console.log(error.response);
+        Swal.fire({
+          title: "Error",
+          text: error.message,
+          icon: "error",
+        });
         // return logOut();
       }
     }

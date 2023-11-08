@@ -13,12 +13,12 @@ const PendingSchedules = () => {
       .get(`/user/services/${user?.email}`)
       .then((res) => {
         setServices(
-          res.data.filter(
-            (service) => service?.statusInfo?.income !== undefined
+          res?.data?.filter(
+            (service) => service?.statusInfo?.status !== "Available"
           )
         );
       })
-      .catch((error) => console.error(error.message));
+      .catch((error) => console.error(error?.message));
   }, [axios, user?.email]);
 
   //   useEffect(() => {

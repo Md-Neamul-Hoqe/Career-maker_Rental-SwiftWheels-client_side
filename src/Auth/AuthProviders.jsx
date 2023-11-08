@@ -18,20 +18,19 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  // const [theme, setTheme] = useState(false);
-  // const [deletedId, setDeletedId] = useState(0);
 
   /* set products in the cart associated to the id in the localStorage cart */
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`/bookings/${user?.email}`)
-      .then((res) => {
-        setError("");
-        setBookings(res.data);
-      })
-      .catch((error) => setError(error.message));
+    if (user?.email)
+      axios
+        .get(`/bookings/${user?.email}`)
+        .then((res) => {
+          setError("");
+          setBookings(res.data);
+        })
+        .catch((error) => setError(error.message));
   }, [axios, user?.email]);
 
   const createUser = (email, password) => {
@@ -203,13 +202,51 @@ const AuthProviders = ({ children }) => {
           /* For database */
           axios
             .patch(`/book-service/${id}`, booking)
-            .then(() =>
+            .then((res) => {
+              /* Update provider schedule */
+              if (res?.data?.modifiedCount || res?.data?.insertedId) {
+                const statusInfo = {
+                  status: "Pending",
+                  income: booking?.totalCost,
+                  schedule: booking?.pickUp,
+                };
+                axios
+                  .patch(
+                    `/update-service/${id}?type=${booking?.type}`,
+                    statusInfo
+                  )
+                  .then((res) => console.log(res.data))
+                  .catch((error) => console.error(error));
+                // const serviceStatus = {
+                //     $set: {
+                //         statusInfo: {
+                //             status: 'Pending',
+                //             income: booking?.totalCost,
+                //             schedule: booking?.pickUp
+                //         }
+                //     }
+                // }
+
+                // if (type === 'bikes') {
+                //     const result1 = await bikeCollection.updateOne(
+                //         query,
+                //         serviceStatus,
+                //     );
+                // }
+
+                // const result1 = await carCollection.updateOne(
+                //     query,
+                //     serviceStatus,
+                // );
+
+                // if (result1.modifiedCount) result.driverInformed = true;
+              }
               Swal.fire({
                 title: "Updated!",
                 text: "Your booking is updated.",
                 icon: "success",
-              })
-            )
+              });
+            })
             .catch((error) => console.error(error.message));
         }
       });
@@ -221,15 +258,28 @@ const AuthProviders = ({ children }) => {
       /* For database */
       axios
         .post(`/book-service?id=${id}`, booking)
-        .then(
-          (res) =>
-            res?.status &&
-            Swal.fire({
-              icon: "success",
-              title: "Booked",
-              text: "Booking Successful",
-            })
-        )
+        .then((res) => {
+          console.log(res.data);
+          if (res?.data?.insertedId || res.data.index > -1) {
+            const statusInfo = {
+              status: "Pending",
+              income: booking?.totalCost,
+              schedule: booking?.pickUp,
+            };
+            axios
+              .patch(`/update-service/${id}?type=${booking?.type}`, {
+                statusInfo,
+              })
+              .then((res) => console.log(res.data))
+              .catch((error) => setError(error?.message));
+          }
+
+          Swal.fire({
+            icon: "success",
+            title: "Booked",
+            text: "Booking Successful",
+          });
+        })
         .catch((error) => console.error(error.message));
     }
   };

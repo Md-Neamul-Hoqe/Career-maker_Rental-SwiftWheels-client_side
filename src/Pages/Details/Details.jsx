@@ -5,7 +5,6 @@ import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../Shared/Heading3/Heading3";
 import { Helmet } from "react-helmet-async";
 import ContextProvider from "../../Hooks/ContextProvider";
-import Swal from "sweetalert2";
 
 const Details = () => {
   const axios = useAxios();
