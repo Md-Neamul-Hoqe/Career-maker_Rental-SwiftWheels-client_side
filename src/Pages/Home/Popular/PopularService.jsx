@@ -42,9 +42,9 @@ const PopularService = (props) => {
             />
           </div>
           <Link
-            to={`/services/${_id}`}
+            to={`/services/${_id}?type=${props?.bike ? "bikes" : "cars"}`}
             className="btn btn-sm rounded bg-black text-white capitalize">
-            {props?.bike ? "Rent Bike" : "Rent Car"}
+            details
           </Link>
         </div>
       </div>

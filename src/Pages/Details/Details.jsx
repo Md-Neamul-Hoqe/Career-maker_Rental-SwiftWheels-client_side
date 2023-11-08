@@ -43,6 +43,14 @@ const Details = () => {
       setTotalCost(duration * service.price);
   };
 
+  const handleBookings = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+
+    const pickUp = form.get("pick-up-date");
+
+    console.log(form.get("location"));
+  };
   // console.log(service?.specifications);
 
   return (
@@ -50,7 +58,7 @@ const Details = () => {
       <div className="flex max-lg:flex-col items-start">
         <img className="flex-1" src={service?.img} alt={service?.name} />
         <div className="card flex-1">
-          <form className="card-body">
+          <form onSubmit={handleBookings} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Location</span>
@@ -133,36 +141,61 @@ const Details = () => {
       </div>
 
       {/* Service Specifications */}
-      <div className={`bg-[url(${service?.type ? bike : car})]`}>
-        <table className="table table-fixed max-w-sm">
-          <thead>
-            <tr>
-              <th className="text-xl text-black" colSpan={2}>
-                Specifications
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {service?.specifications ? (
-              Object.keys(service?.specifications).map((prop, idx) => (
-                <tr key={idx} className="py-2">
-                  <td className="min-w-[20px]">{prop}</td>
-                  <td className="min-w-[20px] text-end">
-                    {service?.specifications[prop]}
-                  </td>
-                </tr>
-              ))
-            ) : (
+      <div className={`flex justify-between`}>
+        <div>
+          <Heading3>Service: {service?.name}</Heading3>
+          <p>{service?.description}</p>
+          <table className="table table-fixed max-w-sm">
+            <thead>
               <tr>
-                <td>Loading...</td>
+                <th className="text-xl text-black" colSpan={2}>
+                  Specifications
+                </th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {service?.specifications ? (
+                Object.keys(service?.specifications).map((prop, idx) => (
+                  <tr key={idx} className="py-2">
+                    <td className="min-w-[20px]">{prop}</td>
+                    <td className="min-w-[20px] text-end">
+                      {service?.specifications[prop]}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Loading...</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <Heading3>Service Provider Information</Heading3>
+          <div className="my-5 flex items-center">
+            <img
+              src={service?.provider?.image}
+              alt={service?.provider?.name}
+              className="w-32"
+            />
+            <div className="text-xl">
+              <p>
+                <span className="font-bold">Name: </span>
+                {service?.provider?.name}
+              </p>
+              <p>
+                <span className="font-bold">Location: </span>
+                {service?.area}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <hr />
 
+      {/* Provider More Services */}
       <section>
         <div className="my-10">
           {services?.length ? (
