@@ -14,7 +14,10 @@ const Cars = () => {
   useEffect(() => {
     axios
       .get("/cars")
-      .then((res) => setCars(res.data))
+      .then((res) => {
+        setError("");
+        setCars(res.data);
+      })
       .catch((error) => setError(error.message));
   }, [axios, setError]);
 

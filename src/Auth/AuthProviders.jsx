@@ -27,7 +27,10 @@ const AuthProviders = ({ children }) => {
   useEffect(() => {
     axios
       .get(`/bookings/${user?.email}`)
-      .then((res) => setBookings(res.data))
+      .then((res) => {
+        setError("");
+        setBookings(res.data);
+      })
       .catch((error) => setError(error.message));
   }, [axios, user?.email]);
 
@@ -69,6 +72,8 @@ const AuthProviders = ({ children }) => {
     const googlePopup = signInWithPopup(auth, googleProvider)
       .then((result) => {
         setUser(result.user);
+
+        setError("");
 
         Swal.fire({
           title: "User created successfully.(Firebase)",

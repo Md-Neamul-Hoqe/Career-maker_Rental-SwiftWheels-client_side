@@ -3,8 +3,10 @@ import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import ContextProvider from "../../Hooks/ContextProvider";
+import useAxios from "../../Hooks/useAxios";
 
 const SignIn = () => {
+  const axios = useAxios();
   const { user, setUser, error, setError, signIn, signInGoogle } =
     ContextProvider();
 
@@ -15,6 +17,8 @@ const SignIn = () => {
     e.preventDefault();
     setError("");
 
+    console.log(location);
+
     const form = e.target;
     const email = form.email.value;
     // const photo = Form.get("photo");
@@ -23,11 +27,10 @@ const SignIn = () => {
     signIn(email, password)
       .then((res) => {
         /* User logged in successfully */
+        setError("");
         setUser(res.user);
-        // console.log(location);
 
         e.target.reset();
-        setError("");
 
         /* show popup after redirect to another page */
         setTimeout(() => {
@@ -42,8 +45,16 @@ const SignIn = () => {
           });
         }, 2000);
 
+        axios
+          .post("/auth/jwt", { email: user?.email })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.success) {
+              location?.state ? navigate(location?.state) : navigate("/");
+            }
+          })
+          .catch((error) => setError(error.message));
         /* navigate after login */
-        location?.state ? navigate(location?.state) : navigate("/");
 
         /* Update user information to database */
         // axios

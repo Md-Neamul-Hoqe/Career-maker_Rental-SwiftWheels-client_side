@@ -35,12 +35,12 @@ const SignUp = () => {
         e.target.reset();
         setError("");
 
-        const createdAt = res.user?.metadata?.creationTime;
+        // const createdAt = res.user?.metadata?.creationTime;
 
         // console.log(name, email, password, createdAt);
 
         /* store data to the database */
-        const user = { name, email, createdAt };
+        // const user = { name, email, createdAt };
 
         setTimeout(() => {
           Swal.fire({
@@ -185,9 +185,9 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-      {/* <Helmet>
-        <title>{"Mahogany | Sign Up"}</title>
-      </Helmet> */}
+      <Helmet>
+        <title>{"SwiftWheels | Sign Up"}</title>
+      </Helmet>
     </section>
   );
 };

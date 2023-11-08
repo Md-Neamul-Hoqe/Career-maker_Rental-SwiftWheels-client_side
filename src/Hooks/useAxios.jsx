@@ -7,20 +7,20 @@ const axiosInstance = axios.create({
 });
 
 const useAxios = () => {
-//   const { logOut } = ContextProvider();
+  // const { logOut } = ContextProvider();
 
-//   axiosInstance.interceptors.response.use(
-//     (res) => {
-//       console.log(res);
-//       return res;
-//     },
-//     (error) => {
-//       if (error.response.status === 401 || error.response.status === 403) {
-//         console.log(error.response);
-//         return logOut();
-//       }
-//     }
-//   );
+  axiosInstance.interceptors.response.use(
+    (res) => {
+      console.log(res.data);
+      return res;
+    },
+    (error) => {
+      if (error.response.status === 401 || error.response.status === 403) {
+        console.log(error.response);
+        // return logOut();
+      }
+    }
+  );
 
   return axiosInstance;
 };

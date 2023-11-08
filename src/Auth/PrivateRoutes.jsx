@@ -1,9 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import ContextProvider from "./ContextProvider";
+import ContextProvider from "../Hooks/ContextProvider";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = ContextProvider();
+  const location = useLocation();
+
+  console.log(location);
 
   if (loading)
     return (
@@ -14,7 +17,7 @@ const PrivateRoutes = ({ children }) => {
 
   if (user) return children;
 
-  return <Navigate to="/SignIn" />;
+  return <Navigate state={location.pathname} to="/SignIn" />;
 };
 
 PrivateRoutes.propTypes = {

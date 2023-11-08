@@ -18,6 +18,7 @@ const MyServices = () => {
     axios
       .get(`/user/services/${user?.email}`)
       .then((res) => {
+        setError("");
         setServices(res.data);
       })
       .catch((error) => setError(error.message));
