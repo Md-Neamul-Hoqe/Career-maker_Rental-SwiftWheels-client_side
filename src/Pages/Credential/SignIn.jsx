@@ -145,9 +145,9 @@ const SignIn = () => {
         </form>
       </div>
 
-      {/* <Helmet>
-        <title>{"Mahogany | Sign In"}</title>
-      </Helmet> */}
+      <Helmet>
+        <title>{"SwiftWheels | Sign In"}</title>
+      </Helmet>
     </div>
   );
 };

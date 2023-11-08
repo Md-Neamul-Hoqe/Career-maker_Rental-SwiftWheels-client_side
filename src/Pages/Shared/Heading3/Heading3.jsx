@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Heading3 = ({ children }) => {
   return (
-    <h3 className="text-4xl text-black font-semibold capitalize">{children}</h3>
+    <h3 className="text-4xl font-semibold capitalize">{children}</h3>
   );
 };
 

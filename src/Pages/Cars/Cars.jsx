@@ -6,13 +6,13 @@ import useAxios from "../../Hooks/useAxios";
 const Cars = () => {
   const axios = useAxios();
   const [cars, setCars] = useState([]);
-  const [error, setError] = useState([]);
   const [length, setLength] = useState(6);
+
   useEffect(() => {
     axios
       .get("/cars")
       .then((res) => setCars(res.data))
-      .catch((error) => setError(error));
+      .catch((error) => console.error(error));
   }, [axios]);
 
   return (
