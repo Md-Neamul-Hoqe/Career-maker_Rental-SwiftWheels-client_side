@@ -2,14 +2,11 @@ import Heading3 from "../Shared/Heading3/Heading3";
 import ContextProvider from "../../Hooks/ContextProvider";
 import useAxios from "../../Hooks/useAxios";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 const AddService = () => {
   const axios = useAxios();
   const { user } = ContextProvider();
-  // const [car, setCar] = useState(null);
-  // const [allFieldsFilled, setAllFieldsFilled] = useState(true);
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -206,6 +203,7 @@ const AddService = () => {
                   type="url"
                   placeholder="Service Photo URL"
                   name="img"
+                  defaultValue={"https://i.ibb.co/ggs11Mp/service-bike.png"}
                   className="input input-bordered w-full"
                 />
               </div>

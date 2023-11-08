@@ -28,7 +28,7 @@ const AuthProviders = ({ children }) => {
     axios
       .get(`/bookings/${user?.email}`)
       .then((res) => setBookings(res.data))
-      .catch((error) => console.error(error.message));
+      .catch((error) => setError(error.message));
   }, [axios, user?.email]);
 
   const createUser = (email, password) => {
@@ -80,7 +80,7 @@ const AuthProviders = ({ children }) => {
           },
         });
       })
-      .catch((error) => setError(error));
+      .catch((error) => setError(error.message));
 
     return () => googlePopup();
   };

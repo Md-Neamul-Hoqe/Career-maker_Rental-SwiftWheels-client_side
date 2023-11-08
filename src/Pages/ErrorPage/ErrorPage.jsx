@@ -6,7 +6,6 @@ import { useRouteError } from "react-router-dom";
 const ErrorPage = () => {
   const error = useRouteError();
 
-  console.log(error);
   return (
     <>
       <Navbar />
@@ -31,7 +30,7 @@ const ErrorPage = () => {
         <details className="text-white text-sm w-full">
           <summary>For Developers:</summary>
           <div>
-            <p>{error?.error?.message}</p>
+            <p>{error}</p>
           </div>
         </details>
       </section>

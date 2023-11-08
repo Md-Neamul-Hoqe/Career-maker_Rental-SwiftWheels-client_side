@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import PopularService from "./PopularService";
 import useAxios from "../../../Hooks/useAxios";
+import ContextProvider from "../../../Hooks/ContextProvider";
 
 const Popular = () => {
   const axios = useAxios();
-  const error = useRouteError();
+  const { error, setError } = ContextProvider();
 
   const [bikes, setBikes] = useState([]);
 
@@ -15,8 +16,8 @@ const Popular = () => {
     axios
       .get("/popular-services?type=bikes")
       .then((res) => setBikes(res.data))
-      .catch((error) => console.log(error));
-  }, [axios]);
+      .catch((error) => setError(error.message));
+  }, [axios, setError]);
 
   const [cars, setCars] = useState([]);
 
@@ -24,15 +25,19 @@ const Popular = () => {
     axios
       .get("/popular-services?type=cars")
       .then((res) => setCars(res.data))
-      .catch((error) => console.log(error));
-  }, [axios]);
+      .catch((error) => setError(error.message));
+  }, [axios, setError]);
 
   return (
     <MaxWidthSection>
       <Heading3>Popular Bikes</Heading3>
       {!bikes?.length || typeof bikes === "string" ? (
         <div className="min-h-screen flex justify-center items-center w-full">
-          <span className="loading loading-infinity w-40 text-primary"></span>
+          {error ? (
+            <Heading3>{error}</Heading3>
+          ) : (
+            <span className="loading loading-infinity w-40 text-primary"></span>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
@@ -54,7 +59,11 @@ const Popular = () => {
       <Heading3>Popular Cars</Heading3>
       {!cars?.length || typeof cars === "string" ? (
         <div className="min-h-screen flex justify-center items-center w-full">
-          <span className="loading loading-infinity w-40 text-primary"></span>
+          {error ? (
+            <Heading3>{error}</Heading3>
+          ) : (
+            <span className="loading loading-infinity w-40 text-primary"></span>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">

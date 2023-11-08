@@ -75,7 +75,7 @@ const SignUp = () => {
         //     }
         //   });
       })
-      .catch((error) => setError(error));
+      .catch((error) => setError(error.message));
   };
 
   return (

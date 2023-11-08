@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
 import useAxios from "../../Hooks/useAxios";
+import ContextProvider from "../../Hooks/ContextProvider";
+import Heading3 from "../Shared/Heading3/Heading3";
 
 const Cars = () => {
   const axios = useAxios();
+  const { error, setError } = ContextProvider();
   const [cars, setCars] = useState([]);
   const [length, setLength] = useState(6);
 
@@ -12,8 +15,8 @@ const Cars = () => {
     axios
       .get("/cars")
       .then((res) => setCars(res.data))
-      .catch((error) => console.error(error));
-  }, [axios]);
+      .catch((error) => setError(error.message));
+  }, [axios, setError]);
 
   return (
     <>
@@ -22,7 +25,11 @@ const Cars = () => {
       <div className="my-20">
         {!cars?.length || typeof cars === "string" ? (
           <div className="min-h-screen flex justify-center items-center w-full">
-            <span className="loading loading-infinity w-40 text-primary"></span>
+            {error ? (
+              <Heading3>{error}</Heading3>
+            ) : (
+              <span className="loading loading-infinity w-40 text-primary"></span>
+            )}
           </div>
         ) : (
           <>

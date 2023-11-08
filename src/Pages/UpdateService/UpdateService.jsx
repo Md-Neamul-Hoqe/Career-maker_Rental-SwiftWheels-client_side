@@ -2,13 +2,22 @@ import Heading3 from "../Shared/Heading3/Heading3";
 import ContextProvider from "../../Hooks/ContextProvider";
 import useAxios from "../../Hooks/useAxios";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const UpdateService = () => {
-  const id = useParams();
+  const [service, setService] = useState();
+  const { id } = useParams();
   console.log(id);
-  
   const axios = useAxios();
-  const { user } = ContextProvider();
+  const { user, error, setError } = ContextProvider();
+
+  useEffect(() => {
+    axios
+      .get(`/services/${id}`)
+      .then((res) => setService(res.data))
+      .catch((error) => setError(error.message));
+  }, [axios, id, setError]);
 
   const handleUpdateService = (e) => {
     e.preventDefault();
@@ -49,8 +58,11 @@ const UpdateService = () => {
     };
 
     axios
-      .post(`/update-service/${_id}`, car)
-      .then((res) => console.log(res.data));
+      .patch(`/update-service/${id}?type=${service?.type}`, car)
+      .then(
+        (res) => res.data.modifiedCount && Swal.fire("Updated successfully.")
+      )
+      .catch((error) => setError(error.message));
   };
 
   return (
@@ -61,133 +73,138 @@ const UpdateService = () => {
 
       <section>
         <div className="card w-full border mb-24">
-          <form
-            onSubmit={handleUpdateService}
-            className="card-body flex-col gap-6 bg-form-bg p-24">
-            <Heading3>Add A Service</Heading3>
-            <div className="flex justify-between gap-6">
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Service Name"
-                  name="title"
-                  defaultValue="Urban Explorer"
-                  className="input input-bordered w-full"
-                />
+          {error ? (
+            <Heading3>{error}</Heading3>
+          ) : (
+            <form
+              onSubmit={handleUpdateService}
+              className="card-body flex-col gap-6 bg-form-bg p-24">
+              <Heading3>Update: {service?.title}</Heading3>
+              <div className="flex justify-between gap-6">
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Service Name"
+                    name="title"
+                    defaultValue={service?.title}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Price
+                    </span>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="$200"
+                    name="price"
+                    defaultValue={service?.price}
+                    className="input input-bordered w-full"
+                  />
+                </div>
               </div>
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Price
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="$200"
-                  name="price"
-                  defaultValue="200"
-                  className="input input-bordered w-full"
-                />
+              <div className="flex justify-between gap-6">
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Status
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Service Status"
+                    name="status"
+                    defaultValue={service?.statusInfo?.status}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Type
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Service Type"
+                    name="type"
+                    defaultValue={service?.type}
+                    className="input input-bordered w-full"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex justify-between gap-6">
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Status
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Service Status"
-                  name="status"
-                  defaultValue="Available"
-                  className="input input-bordered w-full"
-                />
+              <div className="flex justify-between gap-6">
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Specifications
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="specifications"
+                    name="specifications"
+                    defaultValue={JSON.stringify(service?.specifications)}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Area
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Service Area"
+                    name="area"
+                    defaultValue={service?.area}
+                    className="input input-bordered w-full"
+                  />
+                </div>
               </div>
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Type
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Service Type"
-                  name="type"
-                  defaultValue="Bike"
-                  className="input input-bordered w-full"
-                />
+              <div className="flex justify-between gap-6">
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Photo
+                    </span>
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="Service Photo URL"
+                    name="img"
+                    defaultValue={service?.img}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control flex-1">
+                  <label className="label">
+                    <span className="label-text font-semibold text-xl text-black">
+                      Service Description
+                    </span>
+                  </label>
+                  <textarea
+                    className="textarea textarea-bordered"
+                    name="description"
+                    defaultValue={service?.description}
+                    placeholder="Your Message"></textarea>
+                </div>
               </div>
-            </div>
-            <div className="flex justify-between gap-6">
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Specifications
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="specifications"
-                  name="specifications"
-                  defaultValue={`{"seats": 2,"fuel": "Petrol","frontBrake": "Disc","gearBox": "6-Speed","horsepower": "29 HP","engine": "4-Stroke, Twin-Cylinder","stroke": "4.6 inches","overallMileage": "48 mpg"}`}
-                  className="input input-bordered w-full"
-                />
+              <div className="form-control mt-6">
+                <button className="btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-red-600 border-red-600">
+                  Update Service
+                </button>
               </div>
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Area
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Service Area"
-                  name="area"
-                  defaultValue="Dhaka city"
-                  className="input input-bordered w-full"
-                />
-              </div>
-            </div>
-            <div className="flex justify-between gap-6">
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Photo
-                  </span>
-                </label>
-                <input
-                  type="url"
-                  placeholder="Service Photo URL"
-                  name="img"
-                  className="input input-bordered w-full"
-                />
-              </div>
-              <div className="form-control flex-1">
-                <label className="label">
-                  <span className="label-text font-semibold text-xl text-black">
-                    Service Description
-                  </span>
-                </label>
-                <textarea
-                  className="textarea textarea-bordered"
-                  name="description"
-                  defaultValue="Unique service. The description of this service here."
-                  placeholder="Your Message"></textarea>
-              </div>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-red-600 border-red-600">
-                Add Product
-              </button>
-            </div>
-          </form>
+            </form>
+          )}
         </div>
       </section>
     </div>

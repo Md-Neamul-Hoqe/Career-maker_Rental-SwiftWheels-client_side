@@ -12,9 +12,9 @@ const Details = () => {
   const [service, setService] = useState({});
   const [services, setServices] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
-  const [countTheBooking, setCountTheBooking] = useState(0);
+  // const [countTheBooking, setCountTheBooking] = useState(0);
 
-  const { user, handleAddToBookings } = ContextProvider();
+  const { user, handleAddToBookings, setError, error } = ContextProvider();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -29,24 +29,16 @@ const Details = () => {
     axios
       .get(`/services/${id}?type=${type}`)
       .then((res) => setService(...res.data))
-      .catch((error) => console.error(error.message));
-  }, [axios, id, type]);
-
-  /* get previous booking count of this booking */
-  // useEffect(() => {
-  //   axios
-  //     .get(`/bookings/${id}`)
-  //     .then((res) => setCountTheBooking(res.data.count))
-  //     .catch((error) => console.error(error.message));
-  // }, [axios, id, countTheBooking]);
+      .catch((error) => setError(error.message));
+  }, [axios, id, type, setError]);
 
   /* other services of this provider */
   useEffect(() => {
     axios
       .get(`/same-provider-services/${service?.provider?.email}?id=${id}`)
       .then((res) => setServices(res.data))
-      .catch((error) => console.error(error.message));
-  }, [axios, id, service?.provider?.email]);
+      .catch((error) => setError(error.message));
+  }, [axios, id, service?.provider?.email, setError]);
 
   // if (JSON.stringify(service) === "{}") return "Loading...";
 
@@ -80,8 +72,9 @@ const Details = () => {
       bookOn,
       count: 1,
       totalCost,
+      type: service?.type,
       serviceInfo: {
-        name: service?.name,
+        name: service?.title,
         img: service?.img,
       },
       Owner: {
@@ -99,10 +92,10 @@ const Details = () => {
   return (
     <MaxWidthSection>
       <div className="flex max-lg:flex-col items-start">
-        <img className="flex-1" src={service?.img} alt={service?.name} />
+        <img className="flex-1" src={service?.img} alt={service?.title} />
         <div className="card flex-1">
           {/* Service Specifications */}
-          <Heading3>{service?.name}</Heading3>
+          <Heading3>{service?.title}</Heading3>
           <p className="my-2 text-xl">{service?.description}</p>
           <table className="table min-w-min max-w-full text-xl">
             <thead>
@@ -123,9 +116,7 @@ const Details = () => {
                   </tr>
                 ))
               ) : (
-                <tr>
-                  <td>Loading...</td>
-                </tr>
+                <tr>{error ? <td>{error}</td> : <td>Loading...</td>}</tr>
               )}
             </tbody>
           </table>
@@ -293,19 +284,16 @@ const Details = () => {
               </div>
             </>
           ) : (
-            ""
+            error & <Heading3>{error}</Heading3>
           )}
         </div>
       </section>
 
-      <Helmet>
-        <title>{`SwiftWheels | ${service?.name}`}</title>
-      </Helmet>
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <div className="flex justify-between items-end">
-            <h3 className="font-bold text-lg">{service?.name}</h3>
+            <h3 className="font-bold text-lg">{service?.title}</h3>
             <div className="modal-action">
               <label htmlFor="my_modal_6" className="btn">
                 X
@@ -398,23 +386,11 @@ const Details = () => {
           </form>
         </div>
       </div>
+      <Helmet>
+        <title>{`SwiftWheels | ${service?.title}`}</title>
+      </Helmet>
     </MaxWidthSection>
   );
 };
 
 export default Details;
-
-// {services.map((service, idx) => {
-
-//   service?.type === "bikes" ? (
-//     <>
-//       {console.log(service.type)}
-//       <Service bike={service} key={idx}></Service>
-//     </>
-//   ) : (
-//     <>
-//       {console.log(service.type)}
-//       <Service car={service} key={idx}></Service>
-//     </>
-//   );
-// })}

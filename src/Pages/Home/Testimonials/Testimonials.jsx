@@ -3,9 +3,11 @@ import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import P from "../../Shared/P/P";
 import useAxios from "../../../Hooks/useAxios";
+import ContextProvider from "../../../Hooks/ContextProvider";
 
 const Testimonials = () => {
   const axios = useAxios();
+  const { error, setError } = ContextProvider();
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -16,9 +18,9 @@ const Testimonials = () => {
         setComments(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
-  }, [axios]);
+  }, [axios, setError]);
 
   return (
     <div className="my-20">
@@ -27,7 +29,13 @@ const Testimonials = () => {
 
         <div className="flex justify-between max-xl:flex-wrap gap-10 mt-10">
           {!comments?.length ? (
-            <span className="loading loading-spinner loading-lg mx-auto"></span>
+            <div>
+              {error ? (
+                <Heading3>{error}</Heading3>
+              ) : (
+                <span className="loading loading-spinner loading-lg mx-auto"></span>
+              )}
+            </div>
           ) : (
             comments.map((comment) => (
               <div
