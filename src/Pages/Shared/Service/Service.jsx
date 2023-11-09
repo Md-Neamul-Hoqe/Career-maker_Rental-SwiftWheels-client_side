@@ -7,7 +7,7 @@ const Service = (props) => {
 
   const { handleServiceStatus } = props;
 
-  console.log(handleServiceStatus);
+  // console.log(handleServiceStatus);
 
   const {
     _id,
@@ -21,7 +21,7 @@ const Service = (props) => {
     provider,
   } = props?.service || {};
 
-  console.log(props?.service);
+  // console.log(props?.service);
 
   return (
     <div className="card card-compact card-bordered bg-base-100">

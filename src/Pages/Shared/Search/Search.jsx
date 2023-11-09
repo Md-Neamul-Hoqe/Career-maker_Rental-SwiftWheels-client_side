@@ -24,7 +24,7 @@ const Search = ({ type }) => {
       .get(`/filtered-services/${title}?type=${type}`)
       .then((res) => setServices(res.data))
       .catch((error) => setError(error.message));
-    console.log(title);
+    // console.log(title);
   };
 
   return (

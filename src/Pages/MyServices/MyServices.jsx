@@ -13,7 +13,7 @@ const MyServices = () => {
   const { user, setError, error, loading } = ContextProvider();
   const [services, setServices] = useState([]);
 
-  console.log(`/user/services/${user?.email}`);
+  // console.log(`/user/services/${user?.email}`);
 
   useEffect(() => {
     axios
@@ -37,11 +37,11 @@ const MyServices = () => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(`/user/delete-service/${id}?email=${user?.email}`);
+          // console.log(`/user/delete-service/${id}?email=${user?.email}`);
           axios
             .delete(`/user/delete-service/${id}?email=${user?.email}`)
             .then((res) => {
-              console.log("Delete operation result: ", res.data);
+              // console.log("Delete operation result: ", res.data);
 
               if (res.data?.deletedCount) {
                 /* remove from state */

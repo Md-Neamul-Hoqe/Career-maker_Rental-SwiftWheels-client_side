@@ -17,7 +17,7 @@ const AddService = () => {
 
     // console.log(form);
 
-    console.log(allFieldsFilled);
+    // console.log(allFieldsFilled);
     // Loop through the FormData entries
     form.forEach((value) => {
       if (value.trim() === "") {
@@ -46,7 +46,7 @@ const AddService = () => {
     const specifications = form.get("specifications");
     const description = form.get("description");
 
-    console.log(typeof specifications);
+    // console.log(typeof specifications);
     if (typeof specifications !== "string") {
       return Swal({
         icon: "warning",

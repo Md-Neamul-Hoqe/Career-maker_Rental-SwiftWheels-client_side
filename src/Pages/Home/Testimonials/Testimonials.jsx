@@ -14,7 +14,7 @@ const Testimonials = () => {
     axios
       .get("/testimonials")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setComments(response.data);
       })
       .catch((error) => {

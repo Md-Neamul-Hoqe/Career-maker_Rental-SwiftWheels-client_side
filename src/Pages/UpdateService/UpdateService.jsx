@@ -32,7 +32,7 @@ const UpdateService = () => {
     const specifications = form?.specifications?.value;
     const description = form?.description?.value;
 
-    console.log(title, price, description);
+    // console.log(title, price, description);
 
     const car = {
       title,
@@ -52,7 +52,7 @@ const UpdateService = () => {
       },
     };
 
-    console.log(id, service?.type);
+    // console.log(id, service?.type);
 
     axios
       .patch(`/update-service/${id}?type=${service?.type}`, car)
@@ -60,7 +60,7 @@ const UpdateService = () => {
         (res) => res.data.modifiedCount && Swal.fire("Updated successfully.")
       )
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
         setError(error.message);
       });
   };

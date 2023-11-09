@@ -53,7 +53,7 @@ const Details = () => {
   const handleBookings = (e) => {
     e.preventDefault();
 
-    console.log(service.provider?.email, user?.email);
+    // console.log(service.provider?.email, user?.email);
 
     if (service.provider?.email === user?.email)
       return Swal.fire({
@@ -95,7 +95,7 @@ const Details = () => {
 
     handleAddToBookings(booking, id);
 
-    console.log(booking);
+    // console.log(booking);
   };
   // console.log(service?.specifications);
 
@@ -188,7 +188,7 @@ const Details = () => {
                     statusInfo,
                   } = service;
 
-                  console.log(service);
+                  // console.log(service);
                   return (
                     <div
                       key={idx}

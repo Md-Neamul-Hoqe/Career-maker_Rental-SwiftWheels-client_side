@@ -14,7 +14,7 @@ const Schedules = () => {
 
   const total = bookings?.map((booking) => booking?.totalCost);
 
-  console.log(error);
+  // console.log(error);
 
   const axios = useAxios();
   const [services, setServices] = useState([]);
@@ -33,9 +33,9 @@ const Schedules = () => {
   const handleServiceStatus = (service, id) => {
     const selected = document.getElementsByName("status")[0];
 
-    console.log(service);
+    // console.log(service);
 
-    console.log(service?.statusInfo, selected.value);
+    // console.log(service?.statusInfo, selected.value);
 
     // if (res?.data?.modifiedCount || res?.data?.insertedId) {
     const statusInfo = {
@@ -47,7 +47,7 @@ const Schedules = () => {
     axios
       .patch(`/update-service/${id}?type=${service?.type}`, { statusInfo })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data?.modifiedCount) {
           services.map((service) => {
             if (service._id === id)

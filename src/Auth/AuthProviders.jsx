@@ -19,44 +19,10 @@ const AuthProviders = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  /* set products in the cart associated to the id in the localStorage cart */
+  /* set products in the cart associated to the id in the database */
   const [bookings, setBookings] = useState([]);
 
-  console.log(bookings);
-
-  /* Get bookings */
-  useEffect(() => {
-    if (user?.email)
-      axios
-        .get(`/bookings/${user?.email}`)
-        .then((res) => {
-          setError("");
-          console.log("Bookings: ", res?.data);
-          setBookings(res?.data);
-        })
-        .catch((error) => setError(error.message));
-  }, [axios, user?.email, setBookings]);
-
-  /* Check services available now */
-  useEffect(() => {
-    const ids = bookings.map((booking) => booking._id);
-    if (user?.email)
-      axios
-        .post(`/services`, { ids })
-        .then((res) => {
-          setError("");
-
-          const serverIds = res.data.map((booking) => booking._id);
-          const newIds = ids.filter((id) => !serverIds.includes(id));
-
-          if (newIds.length) {
-            Swal.fire(
-              `Services become unavailable. Please remove your bookings of id: ${newIds}`
-            );
-          }
-        })
-        .catch((error) => setError(error.message));
-  }, [axios, user?.email, setBookings, bookings]);
+  // console.log(bookings);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -71,7 +37,7 @@ const AuthProviders = ({ children }) => {
   const logOut = () => {
     setLoading(true);
 
-    console.log("Logging Out");
+    // console.log("Logging Out");
     signOut(auth).then((res) => {
       if (!res) {
         axios
@@ -118,9 +84,9 @@ const AuthProviders = ({ children }) => {
 
         axios
           .post("/auth/jwt", { email: result?.user?.email })
-          .then((res) => {
+          .then(() => {
             setError("");
-            console.log("Google Sign in: ", res?.data);
+            // console.log("Google Sign in: ", res?.data);
             // if (res?.data?.success) {
             //   location?.state ? navigate(location?.state) : navigate("/");
             // }
@@ -131,21 +97,6 @@ const AuthProviders = ({ children }) => {
 
     return () => googlePopup();
   };
-
-  /* onAuthStateChanged */
-  useEffect(() => {
-    const userState = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-
-      console.log("current user: ", currentUser);
-
-      setLoading(false);
-    });
-
-    return () => {
-      userState();
-    };
-  }, []);
 
   const handleRemoveFromBookings = (id) => {
     const theBooking = bookings.find((booking) => booking._id === id);
@@ -173,7 +124,7 @@ const AuthProviders = ({ children }) => {
           axios
             .patch(`/update-service/${id}?type=${theBooking?.type}`, statusInfo)
             .then((res) => {
-              console.log(res.data);
+              // console.log(res.data);
               res.data?.modifiedCount && Swal.fire("Deleted successfully.");
             })
             .catch((error) => console.error(error));
@@ -195,13 +146,13 @@ const AuthProviders = ({ children }) => {
 
     if (bookingIndexInBookings > -1) {
       Swal.fire({
-        title: "Are you want to replace previous booking?",
+        title: "Are you want to update the booking?",
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, replace it!",
+        confirmButtonText: "Yes, update it!",
       }).then((result) => {
         if (result.isConfirmed) {
           /* store the booking in state */
@@ -225,15 +176,17 @@ const AuthProviders = ({ children }) => {
                     `/update-service/${id}?type=${booking?.type}`,
                     statusInfo
                   )
-                  .then((res) => console.log(res.data))
+                  .then((res) => {
+                    // console.log(res.data);
+                    res?.data?.modifiedCount &&
+                      Swal.fire({
+                        title: "Updated!",
+                        text: "Your booking is updated.",
+                        icon: "success",
+                      });
+                  })
                   .catch((error) => console.error(error));
               }
-
-              Swal.fire({
-                title: "Updated!",
-                text: "Your booking is updated.",
-                icon: "success",
-              });
             })
             .catch((error) => console.error(error.message));
         }
@@ -245,7 +198,7 @@ const AuthProviders = ({ children }) => {
       axios
         .post(`/book-service?id=${id}`, booking)
         .then((res) => {
-          console.log(res?.data);
+          // console.log(res?.data);
           if (res?.data?.insertedId || res?.data?.index > -1) {
             const statusInfo = {
               status: "Pending",
@@ -257,10 +210,10 @@ const AuthProviders = ({ children }) => {
                 statusInfo,
               })
               .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data?.modifiedCount) {
                   /* store the booking in state */
-                  console.log("New bookings...", bookings.length);
+                  // console.log("New bookings...", bookings.length);
                   booking._id = id;
                   setBookings([...bookings, booking]);
                 }
@@ -277,6 +230,58 @@ const AuthProviders = ({ children }) => {
         .catch((error) => console.error(error.message));
     }
   };
+
+  /* onAuthStateChanged */
+  useEffect(() => {
+    const userState = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+
+      // console.log("current user: ", currentUser);
+
+      setLoading(false);
+    });
+
+    return () => {
+      userState();
+    };
+  }, []);
+
+  /* Get bookings */
+  useEffect(() => {
+    if (user?.email)
+      axios
+        .get(`/bookings/${user?.email}`)
+        .then((res) => {
+          setError("");
+          // console.log("Bookings: ", res?.data);
+          setBookings(res?.data);
+        })
+        .catch((error) => {
+          // console.log(error);
+          setError(error.message);
+        });
+  }, [axios, user?.email, setBookings]);
+
+  /* Check services available now */
+  useEffect(() => {
+    const ids = bookings.map((booking) => booking._id);
+    if (user?.email)
+      axios
+        .post(`/services`, { ids })
+        .then((res) => {
+          setError("");
+
+          const serverIds = res.data.map((booking) => booking._id);
+          const newIds = ids.filter((id) => !serverIds.includes(id));
+
+          if (newIds.length) {
+            Swal.fire(
+              `Services become unavailable. Please remove your bookings of id: ${newIds}`
+            );
+          }
+        })
+        .catch((error) => setError(error.message));
+  }, [axios, user?.email, setBookings, bookings]);
 
   const authInfo = {
     user,

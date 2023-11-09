@@ -17,7 +17,7 @@ const SignIn = () => {
     e.preventDefault();
     setError("");
 
-    console.log(location);
+    // console.log(location);
 
     const form = e.target;
     const email = form.email.value;

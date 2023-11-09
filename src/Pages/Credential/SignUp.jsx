@@ -60,7 +60,7 @@ const SignUp = () => {
           .post("/auth/jwt", { email })
           .then((res) => {
             setError("");
-            console.log(res?.data);
+            // console.log(res?.data);
             if (res?.data?.success) {
               location?.state ? navigate(location?.state) : navigate("/");
             }
