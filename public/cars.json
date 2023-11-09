@@ -11,7 +11,7 @@
       "email": "info@driveeasy.com"
     },
     "price": 50,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 5,
       "fuel": "Petrol",
@@ -35,7 +35,7 @@
       "email": "info@cityride.com"
     },
     "price": 70,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 4,
       "fuel": "Petrol",
@@ -59,7 +59,7 @@
       "email": "info@luxurydrive.com"
     },
     "price": 150,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 5,
       "fuel": "Petrol",
@@ -83,7 +83,7 @@
       "email": "info@swiftride.com"
     },
     "price": 40,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 4,
       "fuel": "Electric",
@@ -107,7 +107,7 @@
       "email": "info@driveeasy.com"
     },
     "price": 50,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 5,
       "fuel": "Petrol",
@@ -131,7 +131,7 @@
       "email": "info@cityride.com"
     },
     "price": 70,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 5,
       "fuel": "Petrol",
@@ -155,7 +155,7 @@
       "email": "info@luxurydrive.com"
     },
     "price": 150,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 4,
       "fuel": "Petrol",
@@ -179,7 +179,7 @@
       "email": "info@swiftride.com"
     },
     "price": 40,
-    "statusInfo": "Available",
+    "statusInfo": { "status": "available", "income": null, "schedule": null },
     "specifications": {
       "seats": 5,
       "fuel": "Petrol",

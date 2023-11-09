@@ -5,6 +5,7 @@ import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../Shared/Heading3/Heading3";
 import { Helmet } from "react-helmet-async";
 import ContextProvider from "../../Hooks/ContextProvider";
+import Swal from "sweetalert2";
 
 const Details = () => {
   const axios = useAxios();
@@ -13,7 +14,8 @@ const Details = () => {
   const [totalCost, setTotalCost] = useState(0);
   // const [countTheBooking, setCountTheBooking] = useState(0);
 
-  const { user, handleAddToBookings, setError, error } = ContextProvider();
+  const { user, handleAddToBookings, setError, error, loading } =
+    ContextProvider();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -47,9 +49,18 @@ const Details = () => {
     if (!isNaN(duration) && duration > 0)
       setTotalCost(duration * service.price);
   };
-  console.log(service);
+
   const handleBookings = (e) => {
     e.preventDefault();
+
+    console.log(service.provider?.email, user?.email);
+
+    if (service.provider?.email === user?.email)
+      return Swal.fire({
+        title: "What's",
+        text: "This is your own service.",
+        icon: "error",
+      });
 
     const form = new FormData(e.target);
 
@@ -115,7 +126,15 @@ const Details = () => {
                   </tr>
                 ))
               ) : (
-                <tr>{error ? <td>{error}</td> : <td><span className="loading loading-infinity w-40 text-primary"></span></td>}</tr>
+                <tr>
+                  {error ? (
+                    <td>{error}</td>
+                  ) : (
+                    <td>
+                      <span className="loading loading-infinity w-40 text-primary"></span>
+                    </td>
+                  )}
+                </tr>
               )}
             </tbody>
           </table>
@@ -123,94 +142,15 @@ const Details = () => {
             Book Now
           </label>
         </div>
-        {/* <form onSubmit={handleBookings} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Destination</span>
-              </label>
-              <input
-                type="text"
-                name="destination"
-                placeholder="Destination"
-                defaultValue={service?.area}
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Pick Up</span>
-              </label>
-              <div>
-                <input
-                  type="date"
-                  name="pick-up-date"
-                  placeholder="MM/DD/YYYY"
-                  className="input input-bordered"
-                  required
-                />
-                <input
-                  type="time"
-                  name="pick-up-time"
-                  placeholder="12:30 PM"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Drop Off</span>
-              </label>
-              <div>
-                <input
-                  type="date"
-                  name="drop-off-date"
-                  placeholder="MM/DD/YYYY"
-                  className="input input-bordered"
-                  required
-                />
-                <input
-                  type="time"
-                  name="drop-off-time"
-                  placeholder="12:30 PM"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Duration</span>
-              </label>
-
-              <div className="flex justify-between">
-                <input
-                  type="number"
-                  name="duration"
-                  placeholder="times in Hours"
-                  onChange={handleCost}
-                  className="input input-bordered"
-                  required
-                />
-                <button className="btn shadow-sm bg-white text-black">
-                  ${totalCost}
-                </button>
-              </div>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Book Now</button>
-            </div>
-          </form> */}
       </div>
 
       <div>
         <Heading3>Service Provider Information</Heading3>
-        <div className="my-5 flex items-center">
+        <div className="my-5 flex items-center gap-10">
           <img
             src={service?.provider?.image}
             alt={service?.provider?.name}
-            className="w-32"
+            className="w-20"
           />
           <div className="text-xl">
             <p>
@@ -228,7 +168,11 @@ const Details = () => {
       {/* Provider More Services */}
       <section>
         <div className="my-10">
-          {services?.length ? (
+          {loading ? (
+            "Loading.."
+          ) : error ? (
+            <Heading3>{error}</Heading3>
+          ) : services?.length ? (
             <>
               <Heading3>You may also like</Heading3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
@@ -241,9 +185,10 @@ const Details = () => {
                     area,
                     description,
                     price,
-                    status,
+                    statusInfo,
                   } = service;
 
+                  console.log(service);
                   return (
                     <div
                       key={idx}
@@ -256,7 +201,14 @@ const Details = () => {
                         <div>
                           <p>Service Area: {area}</p>
                           <p>Service Description: {description}</p>
-                          <p>Service Status: {status}</p>
+                          <p>
+                            {" "}
+                            {`${
+                              statusInfo?.status
+                                ? "Service Status:" + statusInfo?.status
+                                : ""
+                            }`}
+                          </p>
                         </div>
 
                         <div className="card-actions justify-between items-end grow">
@@ -283,7 +235,7 @@ const Details = () => {
               </div>
             </>
           ) : (
-            error & <Heading3>{error}</Heading3>
+            <Heading3>No more services available</Heading3>
           )}
         </div>
       </section>

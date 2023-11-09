@@ -41,7 +41,7 @@ const MyServices = () => {
           axios
             .delete(`/user/delete-service/${id}?email=${user?.email}`)
             .then((res) => {
-              console.log(res.data);
+              console.log("Delete operation result: ", res.data);
 
               if (res.data?.deletedCount) {
                 /* remove from state */
@@ -120,14 +120,14 @@ const MyServices = () => {
                 ))
               ) : (
                 <tr>
-                  <td
-                    colSpan="5"
-                    className="border min-h-[calc(100vh/3)] text-center">
-                    {error ? (
-                      <Heading3>{error}</Heading3>
-                    ) : (
-                      <Heading3>Your Service Is Empty.</Heading3>
-                    )}
+                  <td colSpan="7">
+                    <div className="border min-h-[calc(100vh/3)] flex items-center justify-center w-full">
+                      {error ? (
+                        <Heading3>{error}</Heading3>
+                      ) : (
+                        <Heading3>Share your vehicles to earn money </Heading3>
+                      )}
+                    </div>
                   </td>
                 </tr>
               )}

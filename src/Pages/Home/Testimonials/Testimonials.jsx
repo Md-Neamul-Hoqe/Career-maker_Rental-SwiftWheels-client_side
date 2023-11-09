@@ -35,7 +35,7 @@ const Testimonials = () => {
               ) : loading ? (
                 <span className="loading loading-infinity w-40 text-primary"></span>
               ) : (
-                <Heading3>No Data Found</Heading3>
+                <Heading3>No Comments Found</Heading3>
               )}
             </div>
           ) : (

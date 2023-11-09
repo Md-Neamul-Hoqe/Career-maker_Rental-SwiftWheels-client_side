@@ -22,16 +22,41 @@ const AuthProviders = ({ children }) => {
   /* set products in the cart associated to the id in the localStorage cart */
   const [bookings, setBookings] = useState([]);
 
+  console.log(bookings);
+
+  /* Get bookings */
   useEffect(() => {
     if (user?.email)
       axios
         .get(`/bookings/${user?.email}`)
         .then((res) => {
           setError("");
+          console.log("Bookings: ", res?.data);
           setBookings(res?.data);
         })
         .catch((error) => setError(error.message));
-  }, [axios, user?.email]);
+  }, [axios, user?.email, setBookings]);
+
+  /* Check services available now */
+  useEffect(() => {
+    const ids = bookings.map((booking) => booking._id);
+    if (user?.email)
+      axios
+        .post(`/services`, { ids })
+        .then((res) => {
+          setError("");
+
+          const serverIds = res.data.map((booking) => booking._id);
+          const newIds = ids.filter((id) => !serverIds.includes(id));
+
+          if (newIds.length) {
+            Swal.fire(
+              `Services become unavailable. Please remove your bookings of id: ${newIds}`
+            );
+          }
+        })
+        .catch((error) => setError(error.message));
+  }, [axios, user?.email, setBookings, bookings]);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -48,16 +73,23 @@ const AuthProviders = ({ children }) => {
 
     console.log("Logging Out");
     signOut(auth).then((res) => {
-      if (!res)
-        Swal.fire({
-          title: "Log out successfully.",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
+      if (!res) {
+        axios
+          .post("/user/logout", res)
+          .then((response) => {
+            if (response?.data?.success)
+              return Swal.fire({
+                title: "Log out successfully.",
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              });
+          })
+          .catch((error) => setError(error.message));
+      }
     });
 
     // return () => loggingOut();
@@ -88,7 +120,7 @@ const AuthProviders = ({ children }) => {
           .post("/auth/jwt", { email: result?.user?.email })
           .then((res) => {
             setError("");
-            console.log(res?.data);
+            console.log("Google Sign in: ", res?.data);
             // if (res?.data?.success) {
             //   location?.state ? navigate(location?.state) : navigate("/");
             // }
@@ -115,71 +147,38 @@ const AuthProviders = ({ children }) => {
     };
   }, []);
 
-  /* Get Cart from DB */
-  // useEffect(() => {
-  //   fetch(`https://mahogany-furniture-server.vercel.app/cart`)
-  //     .then((res) => res.json())
-  //     .then((cartDB) => {
-  //       if (typeof cartDB === "object" && cartDB.length)
-  //         setCart([
-  //           ...cartDB.filter((product) => product.email === user?.email),
-  //         ]);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, [user?.email]);
-
-  // const handleRemoveFromCart = (id, count) => {
-  //   if (!count)
-  //     Swal.fire({
-  //       title: "Are you sure?",
-  //       text: "You won't be able to revert this!",
-  //       icon: "warning",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#3085d6",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Yes, delete it!",
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         /* Remove from DB */
-  //         // fetch(`https://mahogany-furniture-server.vercel.app/cart/${id}`, {
-  //         //   method: "DELETE",
-  //         // })
-  //         //   .then((res) => res.json())
-  //         //   .then((data) => {
-  //         //     // console.log(data);
-  //         //     if (data.deletedCount) {
-  //         //       // visual cart remove
-  //         //       const remainingCart = cart.filter(
-  //         //         (product) => product._id !== id
-  //         //       );
-  //         //       setCart(remainingCart);
-  //         //       // remove from LS
-  //         //       // removeFromLS(id);
-  //         //       Swal.fire(
-  //         //         "Deleted!",
-  //         //         "The product is removed from cart successfully.",
-  //         //         "success"
-  //         //       );
-  //         //     }
-  //         //   });
-  //       }
-  //     });
-  // };
-
   const handleRemoveFromBookings = (id) => {
-    const index = bookings.findIndex((booking) => booking._id === id);
-    if (index > -1) {
-      bookings.splice(index - 1, 1);
-      // console.log(newBookings, bookings);
-      setBookings(bookings);
-    }
-    console.log(index);
+    const theBooking = bookings.find((booking) => booking._id === id);
+    if (!theBooking)
+      return Swal.fire({
+        icon: "error",
+        title: "Failed!",
+        text: "Not booked yet",
+      });
+
+    const newBookings = bookings.filter((booking) => booking._id !== id);
+
+    setBookings(newBookings);
 
     axios
       .delete(`/user/cancel-booking/${id}?email=${user?.email}`)
-      .then(
-        (res) => res?.data.deletedCount && Swal.fire("Deleted successfully.")
-      )
+      .then((res) => {
+        if (res?.data.deletedCount) {
+          const statusInfo = {
+            status: "available",
+            income: null,
+            schedule: null,
+          };
+
+          axios
+            .patch(`/update-service/${id}?type=${theBooking?.type}`, statusInfo)
+            .then((res) => {
+              console.log(res.data);
+              res.data?.modifiedCount && Swal.fire("Deleted successfully.");
+            })
+            .catch((error) => console.error(error));
+        }
+      })
       .catch((error) =>
         Swal.fire({
           icon: "error",
@@ -190,12 +189,11 @@ const AuthProviders = ({ children }) => {
   };
 
   const handleAddToBookings = (booking, id) => {
-    const bookingInState = bookings?.filter((aBooking) => aBooking._id === id);
-    const index = bookings.indexOf(bookingInState);
+    const bookingIndexInBookings = bookings?.findIndex(
+      (aBooking) => aBooking._id === id
+    );
 
-    console.log(bookingInState);
-
-    if (bookingInState.length) {
+    if (bookingIndexInBookings > -1) {
       Swal.fire({
         title: "Are you want to replace previous booking?",
         text: "You won't be able to revert this!",
@@ -203,24 +201,25 @@ const AuthProviders = ({ children }) => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, replace it!",
       }).then((result) => {
         if (result.isConfirmed) {
           /* store the booking in state */
-          const newBookings = booking.splice(index - 1, 1);
+          const newBookings = bookings.filter((booking) => booking._id === id);
           setBookings([...newBookings, booking]);
 
           /* For database */
           axios
-            .patch(`/book-service/${id}`, booking)
+            .patch(`/update-booking/${id}`, booking)
             .then((res) => {
               /* Update provider schedule */
               if (res?.data?.modifiedCount || res?.data?.insertedId) {
                 const statusInfo = {
-                  status: "Pending",
+                  status: "pending",
                   income: booking?.totalCost,
                   schedule: booking?.pickUp,
                 };
+
                 axios
                   .patch(
                     `/update-service/${id}?type=${booking?.type}`,
@@ -229,6 +228,7 @@ const AuthProviders = ({ children }) => {
                   .then((res) => console.log(res.data))
                   .catch((error) => console.error(error));
               }
+
               Swal.fire({
                 title: "Updated!",
                 text: "Your booking is updated.",
@@ -239,11 +239,9 @@ const AuthProviders = ({ children }) => {
         }
       });
     } else {
-      /* store the booking in state */
-      setBookings([...bookings, booking]);
-      console.log("New bookings...", bookings.length);
-
       /* For database */
+      booking.status = "pending";
+
       axios
         .post(`/book-service?id=${id}`, booking)
         .then((res) => {
@@ -258,7 +256,15 @@ const AuthProviders = ({ children }) => {
               .patch(`/update-service/${id}?type=${booking?.type}`, {
                 statusInfo,
               })
-              .then((res) => console.log(res.data))
+              .then((res) => {
+                console.log(res.data);
+                if (res.data?.modifiedCount) {
+                  /* store the booking in state */
+                  console.log("New bookings...", bookings.length);
+                  booking._id = id;
+                  setBookings([...bookings, booking]);
+                }
+              })
               .catch((error) => setError(error?.message));
           }
 

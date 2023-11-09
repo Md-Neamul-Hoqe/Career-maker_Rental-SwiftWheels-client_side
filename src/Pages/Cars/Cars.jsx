@@ -7,7 +7,7 @@ import Heading3 from "../Shared/Heading3/Heading3";
 
 const Cars = () => {
   const axios = useAxios();
-  const { error, setError } = ContextProvider();
+  const { error, setError, loading } = ContextProvider();
   const [cars, setCars] = useState([]);
   const [length, setLength] = useState(6);
 
@@ -30,6 +30,8 @@ const Cars = () => {
           <div className="min-h-screen flex justify-center items-center w-full">
             {error ? (
               <Heading3>{error}</Heading3>
+            ) : !loading ? (
+              <Heading3>No Bike Found</Heading3>
             ) : (
               <span className="loading loading-infinity w-40 text-primary"></span>
             )}

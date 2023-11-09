@@ -28,10 +28,10 @@ const Bikes = () => {
           <div className="min-h-screen flex justify-center items-center w-full">
             {error ? (
               <Heading3>{error}</Heading3>
-            ) : loading ? (
-              <span className="loading loading-infinity w-40 text-primary"></span>
+            ) : !loading ? (
+              <Heading3>No Bike Found</Heading3>
             ) : (
-              <Heading3>No Data Found</Heading3>
+              <span className="loading loading-infinity w-40 text-primary"></span>
             )}
           </div>
         ) : (

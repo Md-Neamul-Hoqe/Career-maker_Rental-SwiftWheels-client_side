@@ -38,7 +38,7 @@ const Popular = () => {
           ) : loading ? (
             <span className="loading loading-infinity w-40 text-primary"></span>
           ) : (
-            <Heading3>No Data Found</Heading3>
+            <Heading3>No Bike Found</Heading3>
           )}
         </div>
       ) : (
@@ -66,7 +66,7 @@ const Popular = () => {
           ) : loading ? (
             <span className="loading loading-infinity w-40 text-primary"></span>
           ) : (
-            <Heading3>No Data Found</Heading3>
+            <Heading3>No Car Found</Heading3>
           )}
         </div>
       ) : (

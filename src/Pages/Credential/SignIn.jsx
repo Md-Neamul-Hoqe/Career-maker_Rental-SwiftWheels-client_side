@@ -30,8 +30,6 @@ const SignIn = () => {
         setError("");
         setUser(res.user);
 
-        console.log(res.user);
-
         /* show popup after redirect to another page */
         setTimeout(() => {
           Swal.fire({
@@ -49,8 +47,7 @@ const SignIn = () => {
             .post("/auth/jwt", { email: res?.user?.email })
             .then((res) => {
               setError("");
-              console.log(res.data);
-              if (res.data.success) {
+              if (res?.data?.success) {
                 location?.state ? navigate(location?.state) : navigate("/");
               }
             })

@@ -60,7 +60,7 @@ const AddService = () => {
     const car = {
       title,
       price,
-      status,
+      statusInfo: { status, income: null, schedule: null },
       img,
       type,
       area,
