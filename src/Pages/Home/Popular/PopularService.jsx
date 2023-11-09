@@ -3,20 +3,25 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const PopularService = (props) => {
-  const { _id, img, name, description, provider, price } = props?.bike
-    ? props.bike
-    : props.car;
+  const {
+    _id,
+    img,
+   title,
+    description,
+    provider,
+    price,
+  } = props?.bike ? props.bike : props.car;
 
   return (
     <div className="card card-compact card-bordered bg-base-100">
       <figure>
-        <img className="mt-5 rounded-lg" src={img} alt={name} />
+        <img className="mt-5 rounded-lg" src={img} alt={title} />
       </figure>
 
       <div className="card-body space-y-5 text-gray-500">
         {/* Service Info */}
         <div>
-          <h2 className="card-title text-black">{name}</h2>
+          <h2 className="card-title text-black">{title}</h2>
           <p>{description}</p>
         </div>
 

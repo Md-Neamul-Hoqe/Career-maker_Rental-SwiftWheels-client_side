@@ -25,7 +25,44 @@ const MyServices = () => {
       .catch((error) => setError(error.message));
   }, [axios, user?.email, setError]);
 
-  console.log(services);
+  const handleDeleteService = (id) => {
+    {
+      Swal.fire({
+        title: "Are you want to replace previous booking?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(`/user/delete-service/${id}?email=${user?.email}`);
+          axios
+            .delete(`/user/delete-service/${id}?email=${user?.email}`)
+            .then((res) => {
+              console.log(res.data);
+
+              if (res.data?.deletedCount) {
+                /* remove from state */
+                const theServices = services.filter(
+                  (service) => service._id !== id
+                );
+                setServices(theServices);
+
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your service is deleted.",
+                  icon: "success",
+                });
+              }
+            })
+            .catch((error) => setError(error?.message));
+        }
+      });
+    }
+  };
+
   return (
     <>
       <DashboardBanner />
@@ -36,15 +73,16 @@ const MyServices = () => {
             <thead className="bg-primary-light h-14 text-black">
               <tr>
                 <th>id</th>
-                <th>Pick Up</th>
-                <th>Income</th>
+                <th>Service</th>
+                <th>Area</th>
+                <th>Price</th>
                 <th>Status</th>
                 <th colSpan={2}>Action</th>
               </tr>
             </thead>
             <tbody className="max-xl:flex-col min-h-[calc(100vh/3)]">
               {loading ? (
-                "Loading..."
+                <span className="loading loading-infinity w-40 text-primary"></span>
               ) : services?.length ? (
                 services.map((service) => (
                   <tr key={service._id}>
@@ -57,11 +95,10 @@ const MyServices = () => {
                     />
                   </td> */}
                     <td className="text-center">
-                      {service?.statusInfo?.schedule || "Not Booked"}
+                      <img src={service?.img} alt="service image" />
                     </td>
-                    <td className="text-center">
-                      TK. {service?.statusInfo?.income || 0}
-                    </td>
+                    <td className="text-center">{service?.area}</td>
+                    <td className="text-center">TK. {service?.price || 0}</td>
                     <td className="text-center">
                       {service?.statusInfo?.status || "Available"}
                     </td>
@@ -74,34 +111,7 @@ const MyServices = () => {
                     </td>
                     <td className="text-center">
                       <button
-                        onClick={() => {
-                          Swal.fire({
-                            title: "Are you want to replace previous booking?",
-                            text: "You won't be able to revert this!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!",
-                          }).then((result) => {
-                            if (result.isConfirmed) {
-                              axios
-                                .delete(
-                                  `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
-                                )
-                                .then((res) => {
-                                  console.log(res.data);
-                                  res.data?.deletedCount &&
-                                    Swal.fire({
-                                      title: "Deleted!",
-                                      text: "Your service is deleted.",
-                                      icon: "success",
-                                    });
-                                })
-                                .catch((error) => setError(error?.message));
-                            }
-                          });
-                        }}
+                        onClick={() => handleDeleteService(service?._id)}
                         className=" btn bg-red-50 text-red-600">
                         delete
                       </button>

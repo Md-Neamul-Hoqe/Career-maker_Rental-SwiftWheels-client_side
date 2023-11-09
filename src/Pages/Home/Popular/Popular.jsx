@@ -42,7 +42,7 @@ const Popular = () => {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
           {bikes.slice(0, 8).map((bike, idx) => (
             <PopularService
               key={idx}
@@ -70,7 +70,7 @@ const Popular = () => {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 my-10 max-w-6xl mx-auto">
           {cars.slice(0, 8).map((car, idx) => (
             <PopularService
               key={idx}

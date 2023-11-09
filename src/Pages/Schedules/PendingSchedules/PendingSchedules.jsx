@@ -69,7 +69,7 @@ const PendingSchedules = () => {
                       <button
                         onClick={() => {
                           axios.delete(
-                            `/user/delete-service/${service._id}?type=${service.type}&email=${user.email}`
+                            `/user/delete-service/${service._id}?email=${user?.email}`
                           );
                         }}
                         className="text-red-600">

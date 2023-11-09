@@ -115,7 +115,7 @@ const Details = () => {
                   </tr>
                 ))
               ) : (
-                <tr>{error ? <td>{error}</td> : <td>Loading...</td>}</tr>
+                <tr>{error ? <td>{error}</td> : <td><span className="loading loading-infinity w-40 text-primary"></span></td>}</tr>
               )}
             </tbody>
           </table>

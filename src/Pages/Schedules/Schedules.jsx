@@ -17,7 +17,7 @@ const Schedules = () => {
       <MaxWidthSection>
         <Heading3>My Bookings</Heading3>
         {loading ? (
-          "Loading..."
+          <span className="loading loading-infinity w-40 text-primary"></span>
         ) : (
           <section className="grid xl:grid-cols-3 gap-5 p-5 md:p-20">
             <table className="w-full xl:col-span-2">

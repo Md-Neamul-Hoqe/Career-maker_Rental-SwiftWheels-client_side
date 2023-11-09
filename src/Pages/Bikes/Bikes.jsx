@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
 import useAxios from "../../Hooks/useAxios";
+import ContextProvider from "../../Hooks/ContextProvider";
+import Heading3 from "../Shared/Heading3/Heading3";
 
 const Bikes = () => {
   const axios = useAxios();
-
+  const { error, loading } = ContextProvider();
   const [bikes, setBikes] = useState([]);
 
   const [length, setLength] = useState(6);
@@ -24,7 +26,13 @@ const Bikes = () => {
       <div className="my-20">
         {!bikes?.length || typeof bikes === "string" ? (
           <div className="min-h-screen flex justify-center items-center w-full">
-            <span className="loading loading-infinity w-40 text-primary"></span>
+            {error ? (
+              <Heading3>{error}</Heading3>
+            ) : loading ? (
+              <span className="loading loading-infinity w-40 text-primary"></span>
+            ) : (
+              <Heading3>No Data Found</Heading3>
+            )}
           </div>
         ) : (
           <>

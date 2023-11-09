@@ -2,18 +2,18 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const Service = (props) => {
-  const { _id, img, name, area, description, price, status } =
+  const { _id, img, title, area, description, price, status } =
     props?.bike || props?.car;
 
-  console.log(_id, img, name, area, description, price, status);
+  console.log(_id, img, title, area, description, price, status);
 
   return (
     <div className="card card-compact card-bordered bg-base-100">
       <figure>
-        <img className="mt-5 rounded-lg" src={img} alt={name} />
+        <img className="mt-5 rounded-lg" src={img} alt={title} />
       </figure>
       <div className="card-body space-y-5 text-gray-500">
-        <h2 className="card-title text-black">{name}</h2>
+        <h2 className="card-title text-black">{title}</h2>
         <div>
           <p>Service Area: {area}</p>
           <p>Service Description: {description}</p>
@@ -30,6 +30,7 @@ const Service = (props) => {
             />
           </div>
           <Link
+            // eslint-disable-next-line react/prop-types
             to={`/services/${_id}?type=${props?.bike ? "bikes" : "cars"}`}
             className="btn btn-sm rounded bg-black text-white capitalize">
             details
