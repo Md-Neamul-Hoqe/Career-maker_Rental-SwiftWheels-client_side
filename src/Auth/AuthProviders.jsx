@@ -39,11 +39,12 @@ const AuthProviders = ({ children }) => {
 
     // console.log("Logging Out");
     signOut(auth).then((res) => {
+      console.log(res);
       if (!res) {
         axios
           .post("/user/logout", res)
           .then((response) => {
-            if (response?.data?.success)
+            if (response?.data?.success) {
               return Swal.fire({
                 title: "Log out successfully.",
                 showClass: {
@@ -53,6 +54,7 @@ const AuthProviders = ({ children }) => {
                   popup: "animate__animated animate__fadeOutUp",
                 },
               });
+            }
           })
           .catch((error) => setError(error.message));
       }
@@ -244,11 +246,11 @@ const AuthProviders = ({ children }) => {
     return () => {
       userState();
     };
-  }, []);
+  }, [axios]);
 
   /* Get bookings */
   useEffect(() => {
-    if (user?.email)
+    if (user?.email) {
       axios
         .get(`/bookings/${user?.email}`)
         .then((res) => {
@@ -260,12 +262,13 @@ const AuthProviders = ({ children }) => {
           // console.log(error);
           setError(error.message);
         });
+    }
   }, [axios, user?.email, setBookings]);
 
   /* Check services available now */
   useEffect(() => {
-    const ids = bookings.map((booking) => booking._id);
-    if (user?.email)
+    if (user?.email) {
+      const ids = bookings?.map((booking) => booking._id);
       axios
         .post(`/services`, { ids })
         .then((res) => {
@@ -281,6 +284,7 @@ const AuthProviders = ({ children }) => {
           }
         })
         .catch((error) => setError(error.message));
+    }
   }, [axios, user?.email, setBookings, bookings]);
 
   const authInfo = {

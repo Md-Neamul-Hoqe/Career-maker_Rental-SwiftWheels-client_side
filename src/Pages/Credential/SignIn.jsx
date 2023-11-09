@@ -43,15 +43,15 @@ const SignIn = () => {
           });
         }, 2000);
 
-          axios
-            .post("/auth/jwt", { email: res?.user?.email })
-            .then((res) => {
-              setError("");
-              if (res?.data?.success) {
-                location?.state ? navigate(location?.state) : navigate("/");
-              }
-            })
-            .catch((error) => setError(error.message));
+        axios
+          .post("/auth/jwt", { email })
+          .then((res) => {
+            setError("");
+            if (res?.data?.success) {
+              location?.state ? navigate(location?.state) : navigate("/");
+            }
+          })
+          .catch((error) => setError(error.message));
         /* navigate after login */
 
         /* Update user information to database */
