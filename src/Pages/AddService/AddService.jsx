@@ -100,9 +100,9 @@ const AddService = () => {
         <div className="card w-full border mb-24">
           <form
             onSubmit={handleAddProduct}
-            className="card-body flex-col gap-6 bg-form-bg p-24">
+            className="card-body flex-col gap-6 bg-form-bg md:p-24">
             <Heading3>Add A Service</Heading3>
-            <div className="flex justify-between gap-6">
+            <div className="max-md:flex-col flex justify-between gap-6">
               <div className="form-control flex-1">
                 <label className="label">
                   <span className="label-text font-semibold text-xl text-black">
@@ -132,7 +132,7 @@ const AddService = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between gap-6">
+            <div className="max-md:flex-col flex justify-between gap-6">
               <div className="form-control flex-1">
                 <label className="label">
                   <span className="label-text font-semibold text-xl text-black">
@@ -162,7 +162,7 @@ const AddService = () => {
                 </select>
               </div>
             </div>
-            <div className="flex justify-between gap-6">
+            <div className="max-md:flex-col flex justify-between gap-6">
               <div className="form-control flex-1">
                 <label className="label">
                   <span className="label-text font-semibold text-xl text-black">
@@ -192,7 +192,7 @@ const AddService = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-between gap-6">
+            <div className="max-md:flex-col flex justify-between gap-6">
               <div className="form-control flex-1">
                 <label className="label">
                   <span className="label-text font-semibold text-xl text-black">
@@ -226,7 +226,7 @@ const AddService = () => {
               ) : (
                 <>
                   <button
-                    className={`btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-red-600 border-red-600`}>
+                    className={`btn btn-lg leading-8 btn-block text-white font-semibold text-[30px] bg-black`}>
                     Add Product
                   </button>
                 </>

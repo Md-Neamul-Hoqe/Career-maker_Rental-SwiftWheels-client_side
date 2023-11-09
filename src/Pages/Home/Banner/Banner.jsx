@@ -15,10 +15,10 @@ https://i.ibb.co/Y7vm1S6/service-banner.png
 const Banner = () => {
   return (
     <section
-      className={`bg-[url(https://i.ibb.co/NYKJsX1/Home-banner.png)] bg-cover w-full min-h-screen mb-10`}>
+      className={`max-lg:bg-black lg:bg-[url(https://i.ibb.co/NYKJsX1/Home-banner.png)] bg-cover w-full max-md:min-h-[calc(100vh/3)] md:min-h-screen mb-10`}>
       <MaxWidthSection>
         <div className="h-screen flex items-center">
-          <div className="flex-1 space-y-10">
+          <div className="max-md:flex-1 space-y-10">
             <h1 className="text-5xl text-white font-bold leading-snug">
               Unlock Endless Driving <br /> With Drivee
             </h1>
@@ -41,7 +41,7 @@ const Banner = () => {
               </Link>
             </div>
           </div>
-          <div className="flex-1"></div>
+          <div className="hidden md:flex-1"></div>
         </div>
       </MaxWidthSection>
     </section>

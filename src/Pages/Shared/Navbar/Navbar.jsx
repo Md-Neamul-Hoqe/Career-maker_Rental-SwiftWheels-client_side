@@ -30,32 +30,36 @@ const Navbar = () => {
           </ul>
         </details>
       </li>
-      <li tabIndex={0}>
-        <details>
-          <summary>Dashboard</summary>
-          <ul className="p-2 rounded-none join join-vertical bg-gray-600 text-gray-300 border border-white">
-            <li>
-              <NavLink
-                to="/add-service"
-                className="whitespace-nowrap join-item">
-                Add Service
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/my-services"
-                className="whitespace-nowrap join-item">
-                My Services
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/schedules" className="whitespace-nowrap join-item">
-                My Schedules
-              </NavLink>
-            </li>
-          </ul>
-        </details>
-      </li>
+      {user?.email ? (
+        <li tabIndex={0}>
+          <details>
+            <summary>Dashboard</summary>
+            <ul className="p-2 rounded-none join join-vertical bg-gray-600 text-gray-300 border border-white">
+              <li>
+                <NavLink
+                  to="/add-service"
+                  className="whitespace-nowrap join-item">
+                  Add Service
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/my-services"
+                  className="whitespace-nowrap join-item">
+                  My Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/schedules"
+                  className="whitespace-nowrap join-item">
+                  My Schedules
+                </NavLink>
+              </li>
+            </ul>
+          </details>
+        </li>
+      ) : null}
     </>
   );
 
@@ -100,7 +104,7 @@ const Navbar = () => {
             {user?.email ? (
               <>
                 <div className="flex items-center gap-5">
-                  <h4>
+                  <h4 className="max-sm:hidden">
                     {user?.displayName
                       ? user.displayName
                       : user.email.split("@")[0]}

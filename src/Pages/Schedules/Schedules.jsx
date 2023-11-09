@@ -70,8 +70,8 @@ const Schedules = () => {
       <MaxWidthSection>
         <Heading3>My Bookings</Heading3>
 
-        <section className="grid xl:grid-cols-3 gap-5 py-5 md:py-20">
-          <table className="w-full xl:col-span-2 table border">
+        <section className="grid xl:grid-cols-3 gap-5 py-5 md:py-20 overflow-x-auto">
+          <table className="w-full xl:col-span-2 table table-xl border">
             <thead className="bg-primary-light h-14 text-black">
               <tr>
                 <th>id</th>
@@ -129,7 +129,7 @@ const Schedules = () => {
               )}
             </tbody>
           </table>
-          <div className="bg-primary-light px-5 text-center py-20 border rounded-lg">
+          <div className="bg-primary-light px-5 text-center py-20 border rounded-lg min-w-[350px] mx-auto">
             <h5 className="whitespace-nowrap">Cart Totals</h5>
             {/* <h5>
         Subtotal <span className="text-body">price</span>

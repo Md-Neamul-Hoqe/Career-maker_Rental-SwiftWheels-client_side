@@ -8,6 +8,7 @@ const axiosInstance = axios.create({
 });
 
 const useAxios = () => {
+  
   // const { logOut } = ContextProvider();
 
   axiosInstance.interceptors.response.use(

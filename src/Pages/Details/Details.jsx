@@ -101,9 +101,9 @@ const Details = () => {
 
   return (
     <MaxWidthSection>
-      <div className="flex max-lg:flex-col items-start">
-        <img className="flex-1" src={service?.img} alt={service?.title} />
-        <div className="card flex-1">
+      <div className="flex max-md:flex-col max-md:gap-10 items-start">
+        <img className="w-full md:flex-1" src={service?.img} alt={service?.title} />
+        <div className="card flex-1 mb-10">
           {/* Service Specifications */}
           <Heading3>{service?.title}</Heading3>
           <p className="my-2 text-xl">{service?.description}</p>

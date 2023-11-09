@@ -14,8 +14,8 @@ const Rent = ({ props }) => {
     <MaxWidthSection>
       <div
         className={`${
-          props?.car ? "" : "flex-row-reverse"
-        } flex gap-5 py-10 min-h-[470px] items-center`}>
+          props?.car ? "" : "lg:flex-row-reverse"
+        } max-lg:flex-col flex gap-5 py-10 min-h-[470px] items-center`}>
         <div className="space-y-5 flex-1">
           <Heading3>{title}</Heading3>
 

@@ -68,8 +68,8 @@ const MyServices = () => {
       <DashboardBanner />
       <MaxWidthSection>
         <Heading3>My Services</Heading3>
-        <section className="my-10">
-          <table className="w-full">
+        <section className="my-10 overflow-x-auto">
+          <table className="max-w-full table table-xs">
             <thead className="bg-primary-light h-14 text-black">
               <tr>
                 <th>id</th>

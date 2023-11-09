@@ -2,7 +2,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/b2jGK2P/service-car.png",
-    "name": "Sedan Sensation",
+    "title": "Sedan Sensation",
     "area": "City Center",
     "description": "Efficient city driving.",
     "provider": {
@@ -26,7 +26,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
-    "name": "Family Voyager",
+    "title": "Family Voyager",
     "area": "Suburbs",
     "description": "Spacious family trips.",
     "provider": {
@@ -50,7 +50,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/BNzzqK4/service-car-2.png",
-    "name": "Luxury Elegance",
+    "title": "Luxury Elegance",
     "area": "Luxury District",
     "description": "Arrive in style.",
     "provider": {
@@ -74,7 +74,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/RDxSRR3/service-car-3.png",
-    "name": "Compact Cruiser",
+    "title": "Compact Cruiser",
     "area": "Airport Zone",
     "description": "Travel light and fast.",
     "provider": {
@@ -98,7 +98,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/KWR4Nwp/service-car-4.png",
-    "name": "Sedan Sensation",
+    "title": "Sedan Sensation",
     "area": "City Center",
     "description": "Efficient city driving.",
     "provider": {
@@ -122,7 +122,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/b2jGK2P/service-car.png",
-    "name": "Family Voyager",
+    "title": "Family Voyager",
     "area": "Suburbs",
     "description": "Spacious family trips.",
     "provider": {
@@ -146,7 +146,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
-    "name": "Luxury Elegance",
+    "title": "Luxury Elegance",
     "area": "Luxury District",
     "description": "Arrive in style.",
     "provider": {
@@ -170,7 +170,7 @@
   {
     "type": "cars",
     "img": "https://i.ibb.co/d0NMF49/service-car-1.png",
-    "name": "Compact Cruiser",
+    "title": "Compact Cruiser",
     "area": "Airport Zone",
     "description": "Travel light and fast.",
     "provider": {
