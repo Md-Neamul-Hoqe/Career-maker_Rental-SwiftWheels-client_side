@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import ContextProvider from "../Hooks/ContextProvider";
+import useContextProvider from "../Hooks/useContextProvider";
 
 const PrivateRoutes = ({ children }) => {
-  const { user, loading } = ContextProvider();
+  const { user, loading } = useContextProvider();
   const location = useLocation();
 
   // console.log(location);

@@ -1,12 +1,12 @@
 import Heading3 from "../Shared/Heading3/Heading3";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import useAxios from "../../Hooks/useAxios";
 import { useMutation } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 const AddService = () => {
   const axios = useAxios();
-  const { user } = ContextProvider();
+  const { user } = useContextProvider();
 
   const handleAddProduct = (e) => {
     e.preventDefault();

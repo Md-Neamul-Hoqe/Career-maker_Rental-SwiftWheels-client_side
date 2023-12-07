@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import useAxios from "../../../Hooks/useAxios";
-import ContextProvider from "../../../Hooks/ContextProvider";
+import useContextProvider from "../../../Hooks/useContextProvider";
 import { useState } from "react";
 import MaxWidthSection from "../MaxWidthSection/MaxWidthSection";
 import Heading3 from "../Heading3/Heading3";
@@ -10,7 +10,7 @@ const Search = ({ type }) => {
   const axios = useAxios();
   const [services, setServices] = useState([]);
   const [search, setSearch] = useState([]);
-  const { setError, error, loading } = ContextProvider();
+  const { setError, error, loading } = useContextProvider();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -22,8 +22,11 @@ const Search = ({ type }) => {
     setSearch(title);
     axios
       .get(`/filtered-services/${title}?type=${type}`)
-      .then((res) => setServices(res.data))
-      .catch((error) => setError(error.message));
+      .then((res) => setServices(res?.data))
+      .catch((error)=>{
+            console.log(error.message);
+            return setError(error.message);
+          });
     // console.log(title);
   };
 
@@ -56,7 +59,7 @@ const Search = ({ type }) => {
               {error ? (
                 <Heading3>{error}</Heading3>
               ) : !loading ? (
-                <Heading3>No Bike Found</Heading3>
+                <Heading3>No {type} Found</Heading3>
               ) : (
                 <span className="loading loading-infinity w-40 text-primary"></span>
               )}

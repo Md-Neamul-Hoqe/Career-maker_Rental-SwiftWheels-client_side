@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import useAxios from "../../Hooks/useAxios";
 import Heading3 from "../Shared/Heading3/Heading3";
 // import MaxWidthSection from "../Shared/MaxWidthSection";
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 const MyServices = () => {
   const axios = useAxios();
-  const { user, setError, error, loading } = ContextProvider();
+  const { user, setError, error, loading } = useContextProvider();
   const [services, setServices] = useState([]);
 
   // console.log(`/user/services/${user?.email}`);
@@ -22,7 +22,10 @@ const MyServices = () => {
         setError("");
         setServices(res?.data);
       })
-      .catch((error) => setError(error.message));
+      .catch((error)=>{
+            console.log(error.message);
+            return setError(error.message);
+          });
   }, [axios, user?.email, setError]);
 
   const handleDeleteService = (id) => {
@@ -41,9 +44,9 @@ const MyServices = () => {
           axios
             .delete(`/user/delete-service/${id}?email=${user?.email}`)
             .then((res) => {
-              // console.log("Delete operation result: ", res.data);
+              // console.log("Delete operation result: ", res?.data);
 
-              if (res.data?.deletedCount) {
+              if (res?.data?.deletedCount) {
                 /* remove from state */
                 const theServices = services.filter(
                   (service) => service._id !== id

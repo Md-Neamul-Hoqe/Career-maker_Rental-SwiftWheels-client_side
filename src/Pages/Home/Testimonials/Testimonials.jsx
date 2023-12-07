@@ -3,35 +3,37 @@ import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../../Shared/Heading3/Heading3";
 import P from "../../Shared/P/P";
 import useAxios from "../../../Hooks/useAxios";
-import ContextProvider from "../../../Hooks/ContextProvider";
+import useContextProvider from "../../../Hooks/useContextProvider";
 
 const Testimonials = () => {
   const axios = useAxios();
-  const { loading, error, setError } = ContextProvider();
+  const { loading } = useContextProvider();
+  const [dataLoadingError, setDataLoadingError] = useState(null);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     axios
       .get("/testimonials")
       .then((response) => {
-        // console.log(response.data);
-        setComments(response.data);
+        setDataLoadingError("");
+        return setComments(response?.data);
       })
       .catch((error) => {
-        setError(error.message);
+        console.log(error.message);
+        return setDataLoadingError(error.message);
       });
-  }, [axios, setError]);
+  }, [axios, setDataLoadingError]);
 
   return (
     <div className="my-20">
       <MaxWidthSection>
         <Heading3>What our customer saying...</Heading3>
 
-        <div className="flex justify-between max-xl:flex-wrap gap-10 mt-10">
+        <div className="flex justify-center items-center max-xl:flex-wrap gap-10 mt-10 min-h-[calc(100vh/3)]">
           {!comments?.length ? (
             <div>
-              {error ? (
-                <Heading3>{error}</Heading3>
+              {dataLoadingError ? (
+                <Heading3>{dataLoadingError}</Heading3>
               ) : loading ? (
                 <span className="loading loading-infinity w-40 text-primary"></span>
               ) : (

@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
 import useAxios from "../../Hooks/useAxios";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import Heading3 from "../Shared/Heading3/Heading3";
 import Search from "../Shared/Search/Search";
+import { Helmet } from "react-helmet-async";
 
 const Bikes = () => {
   const axios = useAxios();
-  const { error, loading } = ContextProvider();
+  const { loading } = useContextProvider();
+  const [dataLoadingError, setDataLoadingError] = useState(null);
   const [bikes, setBikes] = useState([]);
 
   const [length, setLength] = useState(6);
 
   useEffect(() => {
+    setDataLoadingError("");
     axios
       .get("/bikes")
-      .then((res) => setBikes(res.data))
-      .catch((error) => console.error(error));
-  }, [axios]);
+      .then((res) => setBikes(res?.data))
+      .catch((error) => setDataLoadingError(error));
+  }, [axios, setDataLoadingError]);
 
   return (
     <>
@@ -34,8 +37,8 @@ const Bikes = () => {
       <div className="mb-20">
         {!bikes?.length || typeof bikes === "string" ? (
           <div className="min-h-screen flex justify-center items-center w-full">
-            {error ? (
-              <Heading3>{error}</Heading3>
+            {dataLoadingError ? (
+              <Heading3>{dataLoadingError}</Heading3>
             ) : !loading ? (
               <Heading3>No Bike Found</Heading3>
             ) : (
@@ -64,6 +67,9 @@ const Bikes = () => {
           </>
         )}
       </div>
+      <Helmet>
+        <title>{`SwiftWheels | Services - Bikes`}</title>
+      </Helmet>
     </>
   );
 };

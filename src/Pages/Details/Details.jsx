@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
 import Heading3 from "../Shared/Heading3/Heading3";
 import { Helmet } from "react-helmet-async";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import Swal from "sweetalert2";
 
 const Details = () => {
@@ -15,7 +15,7 @@ const Details = () => {
   // const [countTheBooking, setCountTheBooking] = useState(0);
 
   const { user, handleAddToBookings, setError, error, loading } =
-    ContextProvider();
+    useContextProvider();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -29,17 +29,34 @@ const Details = () => {
   useEffect(() => {
     axios
       .get(`/services/${id}?type=${type}`)
-      .then((res) => setService(...res.data))
-      .catch((error) => setError(error.message));
+      .then((res) => {
+        // console.log(res?.data);
+        const theService = res?.data ? res.data : [{}];
+        return setService(...theService);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return setError(error.message);
+      });
   }, [axios, id, type, setError]);
+
+  // console.log(service?.provider);
 
   /* other services of this provider */
   useEffect(() => {
-    axios
-      .get(`/same-provider-services/${service?.provider?.email}?id=${id}`)
-      .then((res) => setServices(res.data))
-      .catch((error) => setError(error.message));
-  }, [axios, id, service?.provider?.email, setError]);
+    service?.provider?.email
+      ? axios
+          .get(`/same-provider-services/${service?.provider?.email}?id=${id}`)
+          .then((res) => {
+            const theServices = res?.data ? res.data : null;
+            return setServices(theServices);
+          })
+          .catch((error) => {
+            console.log(error.message);
+            return setError(error.message);
+          })
+      : setServices([]);
+  }, [axios, id, service?.provider?.email, setError, service?.provider]);
 
   // if (JSON.stringify(service) === "{}") return "Loading...";
 
@@ -102,7 +119,11 @@ const Details = () => {
   return (
     <MaxWidthSection>
       <div className="flex max-md:flex-col max-md:gap-10 items-start">
-        <img className="w-full md:flex-1" src={service?.img} alt={service?.title} />
+        <img
+          className="w-full md:flex-1"
+          src={service?.img}
+          alt={service?.title}
+        />
         <div className="card flex-1 mb-10">
           {/* Service Specifications */}
           <Heading3>{service?.title}</Heading3>

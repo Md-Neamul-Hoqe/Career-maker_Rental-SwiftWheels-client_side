@@ -1,5 +1,5 @@
 import Heading3 from "../Shared/Heading3/Heading3";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import useAxios from "../../Hooks/useAxios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -9,14 +9,23 @@ const UpdateService = () => {
   const [service, setService] = useState({});
   const { id } = useParams();
   const axios = useAxios();
-  const { user, error, setError } = ContextProvider();
+  const { user } = useContextProvider();
+  const [dataLoadingError, setDataLoadingError] = useState(null);
 
   useEffect(() => {
+    setDataLoadingError("");
     axios
       .get(`/services/${id}`)
-      .then((res) => setService(...res.data))
-      .catch((error) => setError(error.message));
-  }, [axios, id, setError]);
+      .then((res) => {
+        console.log(res.data);
+        const theService = res?.data;
+        setService(...theService);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return setDataLoadingError(error.message);
+      });
+  }, [axios, id, setDataLoadingError]);
 
   const handleUpdateService = (e) => {
     e.preventDefault();
@@ -57,11 +66,11 @@ const UpdateService = () => {
     axios
       .patch(`/update-service/${id}?type=${service?.type}`, car)
       .then(
-        (res) => res.data.modifiedCount && Swal.fire("Updated successfully.")
+        (res) => res?.data.modifiedCount && Swal.fire("Updated successfully.")
       )
       .catch((error) => {
         // console.log(error.message);
-        setError(error.message);
+        setDataLoadingError(error.message);
       });
   };
 
@@ -73,8 +82,8 @@ const UpdateService = () => {
 
       <section>
         <div className="card w-full border mb-24">
-          {error ? (
-            <Heading3>{error}</Heading3>
+          {dataLoadingError ? (
+            <Heading3>{dataLoadingError}</Heading3>
           ) : (
             <form
               onSubmit={handleUpdateService}

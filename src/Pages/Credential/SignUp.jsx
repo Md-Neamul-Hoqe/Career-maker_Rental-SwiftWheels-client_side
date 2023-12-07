@@ -2,11 +2,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import useAxios from "../../Hooks/useAxios";
 
+import { motion } from "framer-motion";
+import { useState } from "react";
+
 const SignUp = () => {
-  const { createUser, error, setError, signInGoogle } = ContextProvider();
+  const { createUser, error, setError, signInGoogle } = useContextProvider();
+
+  const [isOn, setIsOn] = useState(false);
+
+  const toggleSwitch = () => setIsOn(!isOn);
+
+  const spring = {
+    type: "spring",
+    stiffness: 700,
+    damping: 30,
+  };
 
   const navigate = useNavigate();
 
@@ -20,7 +33,7 @@ const SignUp = () => {
     const password = Form.get("password");
     // const name = Form.get("name");
     // const photo = Form.get("photo");
-    const check = Form.get("check");
+    const check = isOn;
 
     /* Verifications */
     if (!check) {
@@ -65,30 +78,15 @@ const SignUp = () => {
               location?.state ? navigate(location?.state) : navigate("/");
             }
           })
-          .catch((error) => setError(error.message));
-
-        /* navigate after Registration */
-        // location?.state ? navigate(location?.state) : navigate("/");
-
-        // fetch("https://mahogany-furniture-server.vercel.app/users", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(user),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     // console.log(data);
-
-        //     if (data?.insertedId) {
-        //       console.log("User info stored in database successfully.");
-        //     } else {
-        //       console.log("Database connection lost.");
-        //     }
-        //   });
+          .catch((error)=>{
+            console.log(error.message);
+            return setError(error.message);
+          });
       })
-      .catch((error) => setError(error.message));
+      .catch((error)=>{
+            console.log(error.message);
+            return setError(error.message);
+          });
   };
 
   return (
@@ -156,12 +154,15 @@ const SignUp = () => {
               />
             </div>
             <div className="form-control mt-6 flex flex-row gap-2 text-base">
-              <input
+              <div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
+                <motion.div className="handle" layout transition={spring} />
+              </div>
+              {/* <input
                 type="checkbox"
                 name="check"
                 className="toggle toggle-warning"
                 required
-              />
+              /> */}
               <span className=" text-gray">Accept Terms & Conditions</span>
             </div>
             <div className="form-control mt-6">

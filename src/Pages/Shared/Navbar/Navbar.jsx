@@ -1,10 +1,10 @@
 import PropType from "prop-types";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import ContextProvider from "../../../Hooks/ContextProvider";
+import useContextProvider from "../../../Hooks/useContextProvider";
 
 const Navbar = () => {
   const location = useLocation();
-  const { user, logOut } = ContextProvider();
+  const { user, logOut } = useContextProvider();
 
   // console.log(user);
 

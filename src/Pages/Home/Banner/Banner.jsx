@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import P from "../../Shared/P/P";
 import MaxWidthSection from "../../Shared/MaxWidthSection/MaxWidthSection";
+import { Typewriter } from "react-simple-typewriter";
 
 /**
  * Banners Image
@@ -18,9 +19,21 @@ const Banner = () => {
       className={`max-lg:bg-black lg:bg-[url(https://i.ibb.co/NYKJsX1/Home-banner.png)] bg-cover w-full max-md:min-h-[calc(100vh/3)] md:min-h-screen mb-10`}>
       <MaxWidthSection>
         <div className="h-screen flex items-center">
-          <div className="max-md:flex-1 space-y-10">
+          <div className="flex-1 space-y-10">
             <h1 className="text-5xl text-white font-bold leading-snug">
-              Unlock Endless Driving <br /> With Drivee
+              <Typewriter
+                words={[
+                  "Unlock Endless Driving With Drivee",
+                  "Explore Boundless Roads with RentRide",
+                  "Infinite Adventures Await at RentWheels",
+                  "Endless Journeys Begin at SwiftWheels",
+                  "Embark on Endless Roads with SwiftWheels",
+                ]}
+                deleteSpeed={25}
+                typeSpeed={120}
+                delaySpeed={2000}
+                loop={0}
+              />
             </h1>
             <P>
               Welcome to Drivee, your gateway to endless driving possibilities!
@@ -41,7 +54,7 @@ const Banner = () => {
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex-1"></div>
+          <div className="flex-1"></div>
         </div>
       </MaxWidthSection>
     </section>

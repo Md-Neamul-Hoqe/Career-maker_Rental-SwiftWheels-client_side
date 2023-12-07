@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ContextProvider from "../../../Hooks/ContextProvider";
+import useContextProvider from "../../../Hooks/useContextProvider";
 
 const Service = (props) => {
-  const { user } = ContextProvider();
+  const { user } = useContextProvider();
 
   const { handleServiceStatus } = props;
 
@@ -73,7 +73,7 @@ const Service = (props) => {
           <img className="w-16" src={provider?.image} alt={provider?.name} />
           <div>
             <h5 className="text-sm text-black font-semibold">
-              Name: {provider.name}
+              Name: {provider?.name}
             </h5>
             <p>Email: {provider?.email}</p>
           </div>

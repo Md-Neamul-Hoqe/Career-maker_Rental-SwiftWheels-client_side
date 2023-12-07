@@ -10,11 +10,10 @@ import {
 } from "firebase/auth";
 import Swal from "sweetalert2";
 import auth from "./firebase.config";
-import useAxios from "../Hooks/useAxios";
-export const AuthContext = createContext(null);
+import axios from "axios";
+export const AuthContext = createContext();
 
 const AuthProviders = ({ children }) => {
-  const axios = useAxios();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -56,7 +55,10 @@ const AuthProviders = ({ children }) => {
               });
             }
           })
-          .catch((error) => setError(error.message));
+          .catch((error) => {
+            console.log(error.message);
+            return setError(error.message);
+          });
       }
     });
 
@@ -93,9 +95,15 @@ const AuthProviders = ({ children }) => {
             //   location?.state ? navigate(location?.state) : navigate("/");
             // }
           })
-          .catch((error) => setError(error.message));
+          .catch((error) => {
+            console.log(error.message);
+            return setError(error.message);
+          });
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        return setError(error.message);
+      });
 
     return () => googlePopup();
   };
@@ -126,8 +134,8 @@ const AuthProviders = ({ children }) => {
           axios
             .patch(`/update-service/${id}?type=${theBooking?.type}`, statusInfo)
             .then((res) => {
-              // console.log(res.data);
-              res.data?.modifiedCount && Swal.fire("Deleted successfully.");
+              // console.log(res?.data);
+              res?.data?.modifiedCount && Swal.fire("Deleted successfully.");
             })
             .catch((error) => console.error(error));
         }
@@ -179,7 +187,7 @@ const AuthProviders = ({ children }) => {
                     statusInfo
                   )
                   .then((res) => {
-                    // console.log(res.data);
+                    // console.log(res?.data);
                     res?.data?.modifiedCount &&
                       Swal.fire({
                         title: "Updated!",
@@ -196,7 +204,7 @@ const AuthProviders = ({ children }) => {
     } else {
       /* For database */
       booking.status = "pending";
-
+      setError("");
       axios
         .post(`/book-service?id=${id}`, booking)
         .then((res) => {
@@ -212,8 +220,8 @@ const AuthProviders = ({ children }) => {
                 statusInfo,
               })
               .then((res) => {
-                // console.log(res.data);
-                if (res.data?.modifiedCount) {
+                // console.log(res?.data);
+                if (res?.data?.modifiedCount) {
                   /* store the booking in state */
                   // console.log("New bookings...", bookings.length);
                   booking._id = id;
@@ -221,13 +229,15 @@ const AuthProviders = ({ children }) => {
                 }
               })
               .catch((error) => setError(error?.message));
+
+            return Swal.fire({
+              icon: "success",
+              title: "Booked",
+              text: "Booking Successful",
+            });
           }
 
-          Swal.fire({
-            icon: "success",
-            title: "Booked",
-            text: "Booking Successful",
-          });
+          console.log(res?.data);
         })
         .catch((error) => console.error(error.message));
     }
@@ -239,53 +249,60 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
 
       // console.log("current user: ", currentUser);
+      // if (!currentUser) signOut();
 
       setLoading(false);
     });
 
     return () => {
-      userState();
+      return userState();
     };
-  }, [axios]);
+  }, []);
 
   /* Get bookings */
   useEffect(() => {
     if (user?.email) {
+      setError("");
       axios
         .get(`/bookings/${user?.email}`)
         .then((res) => {
-          setError("");
           // console.log("Bookings: ", res?.data);
-          setBookings(res?.data);
+          const userBookings = res?.data;
+          return setBookings(userBookings ? userBookings : []);
         })
         .catch((error) => {
           // console.log(error);
-          setError(error.message);
+          return setError(error.message);
         });
     }
-  }, [axios, user?.email, setBookings]);
+  }, [user?.email, setBookings]);
 
   /* Check services available now */
   useEffect(() => {
-    if (user?.email) {
+    if (user?.email && bookings?.length) {
       const ids = bookings?.map((booking) => booking._id);
       axios
         .post(`/services`, { ids })
         .then((res) => {
           setError("");
 
-          const serverIds = res.data.map((booking) => booking._id);
+          console.log(res);
+
+          const serverIds = res?.data.map((booking) => booking._id);
           const newIds = ids.filter((id) => !serverIds.includes(id));
 
-          if (newIds.length) {
+          if (newIds?.length) {
             Swal.fire(
               `Services become unavailable. Please remove your bookings of id: ${newIds}`
             );
           }
         })
-        .catch((error) => setError(error.message));
+        .catch((error) => {
+          console.log(error?.message);
+          return setError(error?.message);
+        });
     }
-  }, [axios, user?.email, setBookings, bookings]);
+  }, [user?.email, setBookings, bookings]);
 
   const authInfo = {
     user,

@@ -2,13 +2,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import useAxios from "../../Hooks/useAxios";
 
 const SignIn = () => {
   const axios = useAxios();
   const { user, setUser, error, setError, signIn, signInGoogle } =
-    ContextProvider();
+    useContextProvider();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,7 +51,10 @@ const SignIn = () => {
               location?.state ? navigate(location?.state) : navigate("/");
             }
           })
-          .catch((error) => setError(error.message));
+          .catch((error)=>{
+            console.log(error.message);
+            return setError(error.message);
+          });
         /* navigate after login */
 
         /* Update user information to database */
@@ -59,7 +62,7 @@ const SignIn = () => {
         //   .patch("/users", user)
         //   .then((res) => {
 
-        //     if (res.data.modifiedCount) {
+        //     if (res?.data.modifiedCount) {
         //       setTimeout(() => {
         //         console.log("User info updated in database successfully.");
         //       }, 2500);

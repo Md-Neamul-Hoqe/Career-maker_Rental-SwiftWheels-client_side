@@ -2,25 +2,27 @@ import { useEffect, useState } from "react";
 import Banner from "./Banner/Banner";
 import Service from "../Shared/Service/Service";
 import useAxios from "../../Hooks/useAxios";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import Heading3 from "../Shared/Heading3/Heading3";
 import Search from "../Shared/Search/Search";
+import { Helmet } from "react-helmet-async";
 
 const Cars = () => {
   const axios = useAxios();
-  const { error, setError, loading } = ContextProvider();
+  const { loading } = useContextProvider();
+  const [dataLoadingError, setDataLoadingError] = useState(null);
   const [cars, setCars] = useState([]);
   const [length, setLength] = useState(6);
 
   useEffect(() => {
+    setDataLoadingError("");
     axios
       .get("/cars")
       .then((res) => {
-        setError("");
-        setCars(res.data);
+        setCars(res?.data);
       })
-      .catch((error) => setError(error.message));
-  }, [axios, setError]);
+      .catch((error) => setDataLoadingError(error?.message));
+  }, [axios, setDataLoadingError]);
 
   return (
     <>
@@ -35,8 +37,8 @@ const Cars = () => {
       <div className="mb-20">
         {!cars?.length || typeof cars === "string" ? (
           <div className="min-h-screen flex justify-center items-center w-full">
-            {error ? (
-              <Heading3>{error}</Heading3>
+            {dataLoadingError ? (
+              <Heading3>{dataLoadingError}</Heading3>
             ) : !loading ? (
               <Heading3>No Bike Found</Heading3>
             ) : (
@@ -53,18 +55,23 @@ const Cars = () => {
                 />
               ))}
             </div>
-            <div className="w-full text-center">
-              <button
-                onClick={() => setLength(cars?.length)}
-                className={`btn bg-black text-white ${
-                  length === cars?.length ? "hidden" : ""
-                }`}>
-                Show All
-              </button>
-            </div>
+            {cars?.length !== length ? (
+              <div className="w-full text-center">
+                <button
+                  onClick={() => setLength(cars?.length)}
+                  className={`btn bg-black text-white ${
+                    length === cars?.length ? "hidden" : ""
+                  }`}>
+                  Show All
+                </button>
+              </div>
+            ) : null}
           </>
         )}
       </div>
+      <Helmet>
+        <title>{`SwiftWheels | Services - Cars`}</title>
+      </Helmet>
     </>
   );
 };

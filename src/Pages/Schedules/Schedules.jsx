@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Heading3 from "../Shared/Heading3/Heading3";
 import MaxWidthSection from "../Shared/MaxWidthSection/MaxWidthSection";
-import ContextProvider from "../../Hooks/ContextProvider";
+import useContextProvider from "../../Hooks/useContextProvider";
 import DashboardBanner from "../Shared/DashboardBanner/DashboardBanner";
 import useAxios from "../../Hooks/useAxios";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 const Schedules = () => {
   const { user, loading, bookings, handleRemoveFromBookings, error } =
-    ContextProvider();
+    useContextProvider();
 
   const total = bookings?.map((booking) => booking?.totalCost);
 
@@ -23,9 +23,13 @@ const Schedules = () => {
     axios
       .get(`/user/services/${user?.email}`)
       .then((res) => {
-        setServices(
-          res?.data?.filter((service) => service?.statusInfo?.income !== null)
+        const userServices = res?.data?.filter(
+          (service) => service?.statusInfo?.income !== null
         );
+
+        console.log(userServices);
+
+        setServices(userServices);
       })
       .catch((error) => console.error(error?.message));
   }, [axios, user?.email]);
@@ -47,8 +51,8 @@ const Schedules = () => {
     axios
       .patch(`/update-service/${id}?type=${service?.type}`, { statusInfo })
       .then((res) => {
-        // console.log(res.data);
-        if (res.data?.modifiedCount) {
+        // console.log(res?.data);
+        if (res?.data?.modifiedCount) {
           services.map((service) => {
             if (service._id === id)
               return (service.statusInfo.status = selected.value);
@@ -161,10 +165,10 @@ const Schedules = () => {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-10 max-w-6xl mx-auto">
-                {services.slice(0, length).map((bike, idx) => (
+                {services.map((bike, idx) => (
                   <Service
                     key={idx}
-                    bike={typeof bike === "object" ? bike : {}}
+                    service={typeof bike === "object" ? bike : {}}
                     handleServiceStatus={handleServiceStatus}
                   />
                 ))}
